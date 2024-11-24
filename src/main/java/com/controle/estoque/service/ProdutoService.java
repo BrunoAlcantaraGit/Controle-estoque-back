@@ -82,7 +82,7 @@ public class ProdutoService {
             }
             return produtos;
         }else {
-            throw new Exception("Lista não contem elementos ");
+            throw new Exception("Lista não contem elementos ///");
         }
     }
 
