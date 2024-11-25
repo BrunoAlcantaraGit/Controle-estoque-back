@@ -49,11 +49,12 @@ public class ProdutoService {
 
     @Transactional
     public Produto EditarPorId(Long id, Produto produto) throws Exception {
-        Optional<Produto> buscarProduto = produtoRepository.findById(id);
+        Optional<Produto> buscarProduto = produtoRepository.findBycodigo(produto.getCodigo());
         if (buscarProduto.isPresent()) {
             Produto produtoAtualizado = buscarProduto.get();
             produtoAtualizado.setCategoria(produto.getCategoria());
             produtoAtualizado.setDescricao(produto.getDescricao());
+            produtoAtualizado.setValor(produto.getValor());
             produtoAtualizado.setMarca(produto.getMarca());
             produtoAtualizado.setCodigo(produto.getCodigo());
             return produto;
@@ -64,8 +65,8 @@ public class ProdutoService {
     }
     @Transactional
     public void deletarID(Long id) throws Exception {
-
-        if (produtoRepository.findById(id).isPresent()) {
+    Optional<Produto>LocalizarProduto = produtoRepository.findById(id);
+        if (LocalizarProduto.isPresent()) {
             produtoRepository.deleteById(id);
         } else {
             throw new Exception("Id inválido");

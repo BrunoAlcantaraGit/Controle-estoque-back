@@ -46,7 +46,7 @@ public class ProdutoController implements WebMvcConfigurer {
 }
 @Transactional
 @GetMapping("listar/{id}")
-    public ResponseEntity<Optional<Produto>> listarPorId(Long id) throws Exception{
+    public ResponseEntity<Optional<Produto>> listarPorId(@PathVariable Long id) throws Exception{
       try {
          return new ResponseEntity<>(produtoService.listarPorId(id),HttpStatus.OK);
       }catch (Exception e){
@@ -68,7 +68,7 @@ public class ProdutoController implements WebMvcConfigurer {
     }
     @Transactional
     @DeleteMapping("deletar/{id}")
-    public ResponseEntity deletarId(Long id) throws Exception{
+    public ResponseEntity deletarId(@PathVariable Long id) throws Exception{
         try {
             produtoService.deletarID(id);
             return new ResponseEntity<>(HttpStatus.OK);
