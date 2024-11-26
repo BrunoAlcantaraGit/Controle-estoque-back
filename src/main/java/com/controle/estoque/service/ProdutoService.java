@@ -1,18 +1,13 @@
 package com.controle.estoque.service;
-
 import com.controle.estoque.configuration.ValidarCodigo;
 import com.controle.estoque.model.Produto;
-import com.controle.estoque.model.Total;
 import com.controle.estoque.repository.ProdutoRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
