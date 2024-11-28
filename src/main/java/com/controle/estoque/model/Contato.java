@@ -1,8 +1,6 @@
 package com.controle.estoque.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Contato {
@@ -12,4 +10,6 @@ public class Contato {
     private String telefone;
     private String ddd;
     private String email;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Fornecedor fornecedor;
 }

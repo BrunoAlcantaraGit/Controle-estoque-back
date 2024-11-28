@@ -1,11 +1,66 @@
 package com.controle.estoque.controller;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
+import com.controle.estoque.model.Fornecedor;
+import com.controle.estoque.service.FornecedorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@CrossOrigin
+@RequestMapping("/fornecedores")
 public class FornecedorController {
+   @Autowired
+    FornecedorService fornecedorService;
+    @PostMapping("/salvar")
+    public ResponseEntity<Fornecedor> salvar(@RequestBody Fornecedor fornecedor) throws Exception{
+        try {
+        return  new ResponseEntity<>(fornecedorService.salvar(fornecedor), HttpStatus.CREATED);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+
+        }
+    }
+    @PutMapping("atualizar/{id}")
+    public ResponseEntity<Fornecedor>ataulizarPorId(@PathVariable Long id, @RequestBody Fornecedor fornecedor) throws  Exception{
+       try {
+        return new ResponseEntity<>(fornecedorService.ataulizarPorId(id,fornecedor),HttpStatus.OK);
+       }catch (Exception e){
+           e.printStackTrace();
+           return new ResponseEntity<>(HttpStatus.CONFLICT);
+       }
+    }
+
+    @GetMapping("/listar-tudo")
+    public ResponseEntity<List<Fornecedor>>listarTudo()throws Exception{
+        try {
+            return new ResponseEntity<>(fornecedorService.listarTudo(),HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+    }
+@GetMapping("/listar/{id}")
+    public ResponseEntity<Optional<Fornecedor>>listarPorId(@PathVariable Long id) throws Exception{
+        try {
+            return new ResponseEntity<>(fornecedorService.listarPorId(id),HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+@DeleteMapping("deletar/{id}")
+    public ResponseEntity<Fornecedor>deletarPorId(Long id)throws Exception{
+     try {
+         fornecedorService.deletarPorId(id);
+         return new ResponseEntity<>(HttpStatus.OK);
+     }catch (Exception e ){
+         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+     }
+}
 }

@@ -67,6 +67,9 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
+
+			<!--http://localhost:8080/h2-console
+-->
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
