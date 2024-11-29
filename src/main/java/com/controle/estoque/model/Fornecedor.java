@@ -10,7 +10,7 @@ public class Fornecedor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
-    private String cnpj;
+    private String cpf;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Contato> contatos;
     @OneToOne(cascade = CascadeType.ALL)
@@ -32,12 +32,12 @@ public class Fornecedor {
         this.nome = nome;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public List<Contato> getContatos() {

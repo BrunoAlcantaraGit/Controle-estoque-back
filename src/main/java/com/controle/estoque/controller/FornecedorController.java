@@ -55,7 +55,7 @@ public class FornecedorController {
     }
 
 @DeleteMapping("deletar/{id}")
-    public ResponseEntity<Fornecedor>deletarPorId(Long id)throws Exception{
+    public ResponseEntity<Fornecedor>deletarPorId(@PathVariable Long id)throws Exception{
      try {
          fornecedorService.deletarPorId(id);
          return new ResponseEntity<>(HttpStatus.OK);

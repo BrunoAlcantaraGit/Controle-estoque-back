@@ -1,11 +1,11 @@
 package com.controle.estoque.service;
 
 
-import com.controle.estoque.configuration.CNPJFormatter;
+
 import com.controle.estoque.model.Fornecedor;
 import com.controle.estoque.repository.FornecedorRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -21,7 +21,7 @@ public class FornecedorService {
     FornecedorRepository fornecedorRepository;
 
     public Fornecedor salvar(Fornecedor fornecedor) throws Exception {
-        Optional<Fornecedor> verificarCNPJ = fornecedorRepository.findBycnpj(fornecedor.getCnpj());
+        Optional<Fornecedor> verificarCNPJ = fornecedorRepository.findBycpf(fornecedor.getCpf());
         if (verificarCNPJ.isEmpty()) {
             return fornecedorRepository.save(fornecedor);
         } else {
@@ -31,10 +31,10 @@ public class FornecedorService {
 
 
     public Fornecedor ataulizarPorId(Long id, Fornecedor fornecedor) throws Exception {
-        Optional<Fornecedor> verificarCNPJ = fornecedorRepository.findBycnpj(fornecedor.getCnpj());
+        Optional<Fornecedor> verificarCNPJ = fornecedorRepository.findBycpf(fornecedor.getCpf());
         if (verificarCNPJ.isPresent()) {
             Fornecedor fornecedorAtualizado = verificarCNPJ.get();
-            fornecedorAtualizado.setCnpj(fornecedor.getCnpj());
+            fornecedorAtualizado.setCpf(fornecedor.getCpf());
             fornecedorAtualizado.setNome(fornecedor.getNome());
             fornecedorAtualizado.setContatos(fornecedor.getContatos());
             fornecedorAtualizado.setEndereco(fornecedor.getEndereco());
@@ -67,12 +67,13 @@ public class FornecedorService {
         }
 
     }
-public void deletarPorId(Long id) throws Exception{
+    @Transactional
+    public void deletarPorId(Long id) throws Exception{
         Optional<Fornecedor> verificarFornecedor =fornecedorRepository.findById(id);
         if (verificarFornecedor.isPresent()){
          fornecedorRepository.deleteById(id);
         }else {
             throw new Exception("ID selecionado não localizado");
         }
-}
+  }
 }

@@ -139,3 +139,13 @@ Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:522)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 50 more
+2024-11-29 12:46:01.212229-03:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM FORNECEDOR \000d\000ainner join ENDERECO \000d\000ainner join[*]"; expected "identifier"; SQL statement:
+SELECT * FROM FORNECEDOR 
+inner join ENDERECO 
+inner join [42001-224]
+2024-11-29 12:46:07.185714-03:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM FORNECEDOR \000d\000ainner join ENDERECO [*]end \000d\000ainner join"; SQL statement:
+SELECT * FROM FORNECEDOR 
+inner join ENDERECO end 
+inner join [42000-224]
