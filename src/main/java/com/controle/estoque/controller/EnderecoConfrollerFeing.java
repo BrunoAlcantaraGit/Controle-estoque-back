@@ -14,8 +14,18 @@ import org.springframework.web.bind.annotation.*;
 public class EnderecoConfrollerFeing {
 
     EnderecoService enderecoService;
+
     @GetMapping("endereco-api/{cep}")
     public ResponseEntity<Endereco> retornoEndereco(@PathVariable String cep){
         return new ResponseEntity<>(enderecoService.enderecoRequest(cep), HttpStatus.CREATED);
+    }
+
+    @PutMapping("atualizar-endereco/{id}")
+    public ResponseEntity<Endereco>atualizarEndereco(@RequestBody Endereco endereco,@PathVariable Long id) throws Exception{
+        try {
+            return new ResponseEntity<>(enderecoService.atualizarEndereco(endereco,id),HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

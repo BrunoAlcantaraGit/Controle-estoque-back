@@ -11,8 +11,8 @@ public class Fornecedor {
     private Long id;
     private String nome;
     private String cpf;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Contato> contatos;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Contato contatos;
     @OneToOne(cascade = CascadeType.ALL)
     private Endereco Endereco;
 
@@ -40,11 +40,11 @@ public class Fornecedor {
         this.cpf = cpf;
     }
 
-    public List<Contato> getContatos() {
+    public Contato getContatos() {
         return contatos;
     }
 
-    public void setContatos(List<Contato> contatos) {
+    public void setContatos(Contato contatos) {
         this.contatos = contatos;
     }
 

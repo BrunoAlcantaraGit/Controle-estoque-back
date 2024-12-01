@@ -1,6 +1,7 @@
 package com.controle.estoque.controller;
 
 
+import com.controle.estoque.model.Endereco;
 import com.controle.estoque.model.Fornecedor;
 import com.controle.estoque.service.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class FornecedorController {
     @PutMapping("atualizar/{id}")
     public ResponseEntity<Fornecedor>ataulizarPorId(@PathVariable Long id, @RequestBody Fornecedor fornecedor) throws  Exception{
        try {
-        return new ResponseEntity<>(fornecedorService.ataulizarPorId(id,fornecedor),HttpStatus.OK);
+        return new ResponseEntity<>(fornecedorService.ataulizarPorId(fornecedor, id),HttpStatus.OK);
        }catch (Exception e){
            e.printStackTrace();
            return new ResponseEntity<>(HttpStatus.CONFLICT);

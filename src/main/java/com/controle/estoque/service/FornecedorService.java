@@ -2,7 +2,9 @@ package com.controle.estoque.service;
 
 
 
+import com.controle.estoque.model.Endereco;
 import com.controle.estoque.model.Fornecedor;
+import com.controle.estoque.repository.EnderecoRepository;
 import com.controle.estoque.repository.FornecedorRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -20,6 +22,7 @@ public class FornecedorService {
 
     FornecedorRepository fornecedorRepository;
 
+
     public Fornecedor salvar(Fornecedor fornecedor) throws Exception {
         Optional<Fornecedor> verificarCNPJ = fornecedorRepository.findBycpf(fornecedor.getCpf());
         if (verificarCNPJ.isEmpty()) {
@@ -29,17 +32,17 @@ public class FornecedorService {
         }
     }
 
-
-    public Fornecedor ataulizarPorId(Long id, Fornecedor fornecedor) throws Exception {
+   @Transactional
+    public Fornecedor ataulizarPorId( Fornecedor fornecedor,Long id) throws Exception {
         Optional<Fornecedor> verificarCNPJ = fornecedorRepository.findBycpf(fornecedor.getCpf());
+
         if (verificarCNPJ.isPresent()) {
+
             Fornecedor fornecedorAtualizado = verificarCNPJ.get();
             fornecedorAtualizado.setCpf(fornecedor.getCpf());
             fornecedorAtualizado.setNome(fornecedor.getNome());
             fornecedorAtualizado.setContatos(fornecedor.getContatos());
-            fornecedorAtualizado.setEndereco(fornecedor.getEndereco());
-
-            return fornecedorAtualizado;
+            return fornecedor;
         } else {
             throw new Exception("CNPJ não cadastrado");
         }
