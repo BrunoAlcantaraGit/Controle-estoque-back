@@ -4,6 +4,8 @@ package com.controle.estoque.controller;
 import com.controle.estoque.model.Endereco;
 import com.controle.estoque.model.Fornecedor;
 import com.controle.estoque.service.FornecedorService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,12 @@ import java.util.Optional;
 public class FornecedorController {
    @Autowired
     FornecedorService fornecedorService;
+
+    private  static final Logger logger = LoggerFactory.getLogger(FornecedorController.class);
+
     @PostMapping("/salvar")
     public ResponseEntity<Fornecedor> salvar(@RequestBody Fornecedor fornecedor) throws Exception{
+        logger.info("Dados do front: {}",fornecedor);
         try {
         return  new ResponseEntity<>(fornecedorService.salvar(fornecedor), HttpStatus.CREATED);
         }catch (Exception e){

@@ -1,16 +1,18 @@
 package com.controle.estoque.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Contato {
-    @Id
+@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String telefone;
     private String ddd;
     private String email;
-
 
     public Long getId() {
         return id;

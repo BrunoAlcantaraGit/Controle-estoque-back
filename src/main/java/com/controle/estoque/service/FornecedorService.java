@@ -1,19 +1,18 @@
 package com.controle.estoque.service;
 
-
-
 import com.controle.estoque.model.Endereco;
 import com.controle.estoque.model.Fornecedor;
 import com.controle.estoque.repository.EnderecoRepository;
 import com.controle.estoque.repository.FornecedorRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 @AllArgsConstructor
@@ -41,7 +40,7 @@ public class FornecedorService {
             Fornecedor fornecedorAtualizado = verificarCNPJ.get();
             fornecedorAtualizado.setCpf(fornecedor.getCpf());
             fornecedorAtualizado.setNome(fornecedor.getNome());
-            fornecedorAtualizado.setContatos(fornecedor.getContatos());
+            //fornecedorAtualizado.setContatos(fornecedor.getContatos());
             return fornecedor;
         } else {
             throw new Exception("CNPJ não cadastrado");
