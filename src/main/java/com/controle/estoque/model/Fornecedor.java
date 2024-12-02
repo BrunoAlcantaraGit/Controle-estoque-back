@@ -10,7 +10,7 @@ public class Fornecedor {
     private Long id;
     private String nome;
     private String cpf;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Contato contato;
     @OneToOne(cascade = CascadeType.ALL)
     private Endereco Endereco;

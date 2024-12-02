@@ -40,7 +40,6 @@ public class FornecedorService {
             Fornecedor fornecedorAtualizado = verificarCNPJ.get();
             fornecedorAtualizado.setCpf(fornecedor.getCpf());
             fornecedorAtualizado.setNome(fornecedor.getNome());
-            //fornecedorAtualizado.setContatos(fornecedor.getContatos());
             return fornecedor;
         } else {
             throw new Exception("CNPJ não cadastrado");
