@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Contato {
-@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String telefone;

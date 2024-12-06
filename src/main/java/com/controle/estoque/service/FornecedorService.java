@@ -23,8 +23,8 @@ public class FornecedorService {
 
 
     public Fornecedor salvar(Fornecedor fornecedor) throws Exception {
-        Optional<Fornecedor> verificarCNPJ = fornecedorRepository.findBycpf(fornecedor.getCpf());
-        if (verificarCNPJ.isEmpty()) {
+        Optional<Fornecedor> verificarDocumento = fornecedorRepository.findBydocumento(fornecedor.getDocumento());
+        if (verificarDocumento.isEmpty()) {
             return fornecedorRepository.save(fornecedor);
         } else {
             throw new Exception("CNPJ já cadastrado");
@@ -33,12 +33,12 @@ public class FornecedorService {
 
    @Transactional
     public Fornecedor ataulizarPorId( Fornecedor fornecedor,Long id) throws Exception {
-        Optional<Fornecedor> verificarCNPJ = fornecedorRepository.findBycpf(fornecedor.getCpf());
+        Optional<Fornecedor> verificarDocumento = fornecedorRepository.findBydocumento(fornecedor.getDocumento());
 
-        if (verificarCNPJ.isPresent()) {
+        if (verificarDocumento.isPresent()) {
 
-            Fornecedor fornecedorAtualizado = verificarCNPJ.get();
-            fornecedorAtualizado.setCpf(fornecedor.getCpf());
+            Fornecedor fornecedorAtualizado = verificarDocumento.get();
+            fornecedorAtualizado.setCpf(fornecedor.getDocumento());
             fornecedorAtualizado.setNome(fornecedor.getNome());
             return fornecedor;
         } else {
@@ -47,10 +47,10 @@ public class FornecedorService {
     }
 
     public List<Fornecedor> listarTudo() throws Exception {
-        List<Fornecedor> verificarCNPJ = fornecedorRepository.findAll();
+        List<Fornecedor> verificarDocumento = fornecedorRepository.findAll();
         List<Fornecedor> fornecedores = new ArrayList<>();
-        if (!verificarCNPJ.isEmpty()) {
-            for (Fornecedor f : verificarCNPJ) {
+        if (!verificarDocumento.isEmpty()) {
+            for (Fornecedor f : verificarDocumento) {
                 fornecedores.add(f);
             }
             return fornecedores;

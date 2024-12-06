@@ -34,7 +34,6 @@ EnderecoFeing enderecoFeing;
 
             return endereco;
 
-
         }else {
             throw new Exception("Endereco não existe");
         }

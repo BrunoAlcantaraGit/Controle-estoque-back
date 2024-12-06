@@ -9,7 +9,7 @@ public class Fornecedor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
-    private String cpf;
+    private String documento;
     @OneToOne(cascade = CascadeType.PERSIST)
     private Contato contato;
     @OneToOne(cascade = CascadeType.ALL)
@@ -39,12 +39,12 @@ public class Fornecedor {
         this.nome = nome;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getDocumento() {
+        return documento;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setCpf(String documento) {
+        this.documento = documento;
     }
 
 
@@ -61,7 +61,7 @@ public class Fornecedor {
         return "Fornecedor{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
+                ", documento='" + documento + '\'' +
                 ", Endereco=" + Endereco +
                 '}';
     }
