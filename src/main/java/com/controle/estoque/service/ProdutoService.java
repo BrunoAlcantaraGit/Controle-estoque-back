@@ -49,7 +49,9 @@ public class ProdutoService {
             Produto produtoAtualizado = buscarProduto.get();
             produtoAtualizado.setCategoria(produto.getCategoria());
             produtoAtualizado.setDescricao(produto.getDescricao());
-            produtoAtualizado.setValor(produto.getValor());
+            produtoAtualizado.setValorDeCompra(produto.getValorDeCompra());
+            produtoAtualizado.setQuantidade(produto.getQuantidade());
+            produtoAtualizado.setValorDaUnidade(produto.getValorDaUnidade());
             produtoAtualizado.setMarca(produto.getMarca());
             produtoAtualizado.setCodigo(produto.getCodigo());
             return produto;
@@ -88,8 +90,8 @@ public class ProdutoService {
         if(!validarProdutos.isEmpty()){
 
               BigDecimal totals = validarProdutos.stream()
-                      .map(produto -> produto.getValor())
-                      .filter(valor -> valor  != null)
+                      .map(produto -> produto.getValorDeCompra())
+                      .filter(valorDeCompra -> valorDeCompra  != null)
                       .reduce(BigDecimal.ZERO, BigDecimal::add);
 
           return  totals;
@@ -100,6 +102,15 @@ public class ProdutoService {
 
     }
 
+    public BigDecimal valorTotalDoProduto(BigDecimal quantidade,BigDecimal valorDaUnidade) throws Exception{
+     BigDecimal total =  quantidade.multiply(valorDaUnidade);
+    if(quantidade != null && valorDaUnidade !=null){
+        return total;
 
+    }else{
+        throw new RuntimeException("nenhum paramentro informado");
+    }
+
+    }
 
 }

@@ -88,5 +88,15 @@ public class ProdutoController implements WebMvcConfigurer {
         }
     }
 
+    @Transactional
+    @GetMapping("calcular-total-do-produto/{quanitidade}/{valorDaUnidade}")
+    public ResponseEntity<BigDecimal> valorTotalDoProduto(@PathVariable BigDecimal quanitidade, @PathVariable BigDecimal valorDaUnidade) throws Exception{
+      try {
+          return new ResponseEntity<>(produtoService.valorTotalDoProduto(quanitidade,valorDaUnidade),HttpStatus.OK);
+      }catch (Exception e){
+          e.printStackTrace();
+          return new ResponseEntity<>(HttpStatus.CONFLICT);
+      }
+    }
 
 }

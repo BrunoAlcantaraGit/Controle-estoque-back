@@ -13,22 +13,33 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String descricao;
-    private BigDecimal valor;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Total total;
+    private Double quantidade;
+    private BigDecimal valorDaUnidade;
+    private BigDecimal valorDeCompra;
     private String marca;
     private String codigo;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Total total;
     @OneToOne(cascade = CascadeType.ALL)
     private Categoria categoria;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private String dataCadastro;
 
-    public Total getTotal() {
-        return total;
+
+    public BigDecimal getValorDaUnidade() {
+        return valorDaUnidade;
     }
 
-    public void setTotal(Total total) {
-        this.total = total;
+    public void setValorDaUnidade(BigDecimal valorDaUnidade) {
+        this.valorDaUnidade = valorDaUnidade;
+    }
+
+    public Double getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Double quantidade) {
+        this.quantidade = quantidade;
     }
 
     public Long getId() {
@@ -47,16 +58,24 @@ public class Produto {
         this.descricao = descricao;
     }
 
+    public BigDecimal getValorDeCompra() {
+        return valorDeCompra;
+    }
+
+    public void setValorDeCompra(BigDecimal valorDeCompra) {
+        this.valorDeCompra = valorDeCompra;
+    }
+
+    public Total getTotal() {
+        return total;
+    }
+
+    public void setTotal(Total total) {
+        this.total = total;
+    }
+
     public String getMarca() {
         return marca;
-    }
-
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
     }
 
     public void setMarca(String marca) {
@@ -87,3 +106,4 @@ public class Produto {
         this.dataCadastro = dataCadastro;
     }
 }
+
