@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Entity
@@ -18,6 +19,7 @@ public class Produto {
     private BigDecimal valorDeCompra;
     private String marca;
     private String codigo;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Total total;
     @OneToOne(cascade = CascadeType.ALL)

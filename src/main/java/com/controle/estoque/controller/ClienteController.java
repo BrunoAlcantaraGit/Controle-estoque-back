@@ -20,7 +20,6 @@ import java.util.Optional;
 @CrossOrigin
 @RequestMapping("clientes")
 public class ClienteController {
-    @Autowired
     ClienteService clienteService;
 
 

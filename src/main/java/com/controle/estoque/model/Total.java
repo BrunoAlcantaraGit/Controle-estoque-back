@@ -21,4 +21,12 @@ public class Total {
     public void setTotal(BigDecimal total) {
         this.total = total;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

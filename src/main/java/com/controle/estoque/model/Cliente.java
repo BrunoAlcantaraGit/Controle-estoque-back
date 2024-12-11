@@ -1,6 +1,9 @@
 package com.controle.estoque.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
 public class Cliente {
@@ -9,9 +12,11 @@ public class Cliente {
     private Long id;
     private String nome;
     private String documento;
-    @OneToOne(cascade = CascadeType.ALL)
+   @OneToMany(cascade = CascadeType.PERSIST)
+   private List<Produto> produtos;
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Contato contato;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Endereco Endereco;
 
     public Long getId() {
@@ -52,5 +57,13 @@ public class Cliente {
 
     public void setEndereco(com.controle.estoque.model.Endereco endereco) {
         Endereco = endereco;
+    }
+
+   public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 }

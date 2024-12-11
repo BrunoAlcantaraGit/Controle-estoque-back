@@ -5,6 +5,9 @@ import com.controle.estoque.repository.ClienteRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -17,11 +20,13 @@ import java.util.Optional;
 @Data
 @CrossOrigin
 public class ClienteService {
+    @Autowired
     ClienteRepository clienteRepository;
 
-    public Cliente salvar(Cliente cliente) throws Exception {
-        Optional<Cliente> verificarDocumento = clienteRepository.findByDocumento(cliente.getDocumento());
 
+    public Cliente salvar(Cliente cliente) throws Exception {
+
+        Optional<Cliente> verificarDocumento = clienteRepository.findByDocumento(cliente.getDocumento());
         if (verificarDocumento.isEmpty()) {
             return clienteRepository.save(cliente);
         } else {
