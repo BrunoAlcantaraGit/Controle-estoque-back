@@ -1,24 +1,17 @@
-package com.controle.estoque.model;
-
-import jakarta.persistence.*;
-import lombok.Data;
-
+package com.controle.estoque.v1.dto;
+import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;
+public class SaidaDeProdutoDTO {
 
-@Entity
-@Data
-public class SaídaDeProduto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int quantidade;
-    private BigDecimal valordaVendaUnidade;
+    private BigDecimal valorDaUnidade;
     private BigDecimal valorTotaldaVenda;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Produto produto;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Cliente cliente;
+    private Long produto;
+    private Long cliente;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private String data;
 
     public Long getId() {
         return id;
@@ -36,12 +29,12 @@ public class SaídaDeProduto {
         this.quantidade = quantidade;
     }
 
-    public BigDecimal getValordaVendaUnidade() {
-        return valordaVendaUnidade;
+    public BigDecimal getValorDaUnidade() {
+        return valorDaUnidade;
     }
 
-    public void setValordaVendaUnidade(BigDecimal valordaVendaUnidade) {
-        this.valordaVendaUnidade = valordaVendaUnidade;
+    public void setValorDaUnidade(BigDecimal valorDaUnidade) {
+        this.valorDaUnidade = valorDaUnidade;
     }
 
     public BigDecimal getValorTotaldaVenda() {
@@ -52,19 +45,27 @@ public class SaídaDeProduto {
         this.valorTotaldaVenda = valorTotaldaVenda;
     }
 
-    public Produto getProduto() {
+    public Long getProduto() {
         return produto;
     }
 
-    public void setProduto(Produto produto) {
+    public void setProduto(Long produto) {
         this.produto = produto;
     }
 
-    public Cliente getCliente() {
+    public Long getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(Long cliente) {
         this.cliente = cliente;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }

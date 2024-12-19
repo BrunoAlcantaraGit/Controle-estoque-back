@@ -1,7 +1,7 @@
 package com.controle.estoque.repository;
 
-import com.controle.estoque.model.SaídaDeProduto;
+import com.controle.estoque.model.SaidaDeProduto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SaindaDeProdutoRepository extends JpaRepository<SaídaDeProduto,Long> {
+public interface SaindaDeProdutoRepository extends JpaRepository<SaidaDeProduto,Long> {
 }

@@ -1,4 +1,4 @@
-package com.controle.estoque.controller;
+package com.controle.estoque.v1.controller;
 
 import com.controle.estoque.model.Endereco;
 import com.controle.estoque.service.EnderecoService;

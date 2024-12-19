@@ -25,7 +25,6 @@ public class ClienteService {
 
 
     public Cliente salvar(Cliente cliente) throws Exception {
-
         Optional<Cliente> verificarDocumento = clienteRepository.findByDocumento(cliente.getDocumento());
         if (verificarDocumento.isEmpty()) {
             return clienteRepository.save(cliente);

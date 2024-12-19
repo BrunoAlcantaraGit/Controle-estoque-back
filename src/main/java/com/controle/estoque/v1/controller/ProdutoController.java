@@ -1,5 +1,6 @@
-package com.controle.estoque.controller;
+package com.controle.estoque.v1.controller;
 
+import com.controle.estoque.model.Categoria;
 import com.controle.estoque.model.Produto;
 import com.controle.estoque.model.Total;
 import com.controle.estoque.service.ProdutoService;
@@ -24,6 +25,7 @@ public class ProdutoController implements WebMvcConfigurer {
     @Autowired
     ProdutoService produtoService;
 
+
     @PostMapping("/salvar")
     public ResponseEntity<Produto> salvarProduto(@RequestBody Produto produto) throws Exception {
         try {
@@ -40,7 +42,7 @@ public class ProdutoController implements WebMvcConfigurer {
       try {
           return new ResponseEntity<>(produtoService.listarTudo(),HttpStatus.OK);
       }catch (Exception e){
-          e.printStackTrace();
+      //    e.printStackTrace();
          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
       }
 }
@@ -50,7 +52,7 @@ public class ProdutoController implements WebMvcConfigurer {
       try {
          return new ResponseEntity<>(produtoService.listarPorId(id),HttpStatus.OK);
       }catch (Exception e){
-          e.printStackTrace();
+        //  e.printStackTrace();
         return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
       }
 }
@@ -73,7 +75,7 @@ public class ProdutoController implements WebMvcConfigurer {
             produtoService.deletarID(id);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
-            e.printStackTrace();
+          //  e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -94,7 +96,7 @@ public class ProdutoController implements WebMvcConfigurer {
       try {
           return new ResponseEntity<>(produtoService.valorTotalDoProduto(quanitidade,valorDaUnidade),HttpStatus.OK);
       }catch (Exception e){
-          e.printStackTrace();
+        //  e.printStackTrace();
           return new ResponseEntity<>(HttpStatus.CONFLICT);
       }
     }

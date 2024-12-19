@@ -1,7 +1,11 @@
 package com.controle.estoque.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
@@ -9,6 +13,7 @@ import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Produto {
 @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,12 +25,14 @@ public class Produto {
     private String marca;
     private String codigo;
 
+
     @OneToOne(cascade = CascadeType.ALL)
     private Total total;
     @OneToOne(cascade = CascadeType.ALL)
     private Categoria categoria;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private String dataCadastro;
+
 
 
     public BigDecimal getValorDaUnidade() {
@@ -107,5 +114,7 @@ public class Produto {
     public void setDataCadastro(String dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
+
+
 }
 
