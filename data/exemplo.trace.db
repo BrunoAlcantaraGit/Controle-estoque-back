@@ -1676,3 +1676,6 @@ SAIDA_DE_PRODUTO_CLIENTES [42001-224]
 2024-12-19 11:26:41.853597-03:00 jdbc[33]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]SAIDA_DE_PRODUTO_PRODUTOS"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
 SAIDA_DE_PRODUTO_PRODUTOS [42001-224]
+2024-12-20 16:12:44.832268-03:00 jdbc[63]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]PRODUTO_SAIDA_DE_PRODUTOS"; expected "PREPARE"; SQL statement:
+PRODUTO_SAIDA_DE_PRODUTOS [42001-224]

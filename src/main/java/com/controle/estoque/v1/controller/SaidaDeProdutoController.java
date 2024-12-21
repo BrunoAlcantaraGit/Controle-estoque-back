@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +39,8 @@ public class SaidaDeProdutoController {
             saidaDeProduto.setQuantidade(saidaDeProdutoDTO.getQuantidade());
             saidaDeProduto.setValorDaUnidade(saidaDeProdutoDTO.getValorDaUnidade());
             saidaDeProduto.setValorTotaldaVenda(saidaDeProdutoDTO.getValorTotaldaVenda());
+            saidaDeProduto.setDataCadastro(saidaDeProdutoDTO.getDataCadastro());
+
 
             return new ResponseEntity<>(saidaService.salvarVenda(saidaDeProduto), HttpStatus.OK);
         } catch (Exception e) {
@@ -56,5 +59,14 @@ public ResponseEntity<List<SaidaDeProduto>>listarTodasAsSaidas() throws Exceptio
       }
 
     }
+
+@GetMapping("valor-total-venda")
+public  ResponseEntity<BigDecimal>somarTotalVenda()throws Exception{
+        try {
+           return new ResponseEntity<>(saidaService.somarTotalVenda(),HttpStatus.OK);
+        }catch (Exception e){
+           return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+}
 
 }

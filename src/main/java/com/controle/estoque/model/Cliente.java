@@ -1,10 +1,8 @@
 package com.controle.estoque.model;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+
 
 @Data
 @NoArgsConstructor

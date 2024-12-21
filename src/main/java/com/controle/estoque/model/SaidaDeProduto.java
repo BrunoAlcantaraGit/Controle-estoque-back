@@ -15,12 +15,13 @@ public class SaidaDeProduto {
     private int quantidade;
     private BigDecimal valorDaUnidade;
     private BigDecimal valorTotaldaVenda;
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private String dataCadastro;
     @ManyToOne
     private Produto produto;
     @ManyToOne
     private Cliente cliente;
+
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private String dataCadastro;
 
     public Long getId() {
         return id;
@@ -54,14 +55,6 @@ public class SaidaDeProduto {
         this.valorTotaldaVenda = valorTotaldaVenda;
     }
 
-    public String getData() {
-        return dataCadastro;
-    }
-
-    public void setData(String data) {
-        this.dataCadastro = data;
-    }
-
     public Produto getProduto() {
         return produto;
     }
@@ -76,5 +69,13 @@ public class SaidaDeProduto {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public String getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(String dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 }

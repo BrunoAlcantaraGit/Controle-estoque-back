@@ -11,7 +11,7 @@ public class SaidaDeProdutoDTO {
     private Long produto;
     private Long cliente;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private String data;
+    private String dataCadastro;
 
     public Long getId() {
         return id;
@@ -61,11 +61,11 @@ public class SaidaDeProdutoDTO {
         this.cliente = cliente;
     }
 
-    public String getData() {
-        return data;
+    public String getDataCadastro() {
+        return dataCadastro;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setDataCadastro(String dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 }
