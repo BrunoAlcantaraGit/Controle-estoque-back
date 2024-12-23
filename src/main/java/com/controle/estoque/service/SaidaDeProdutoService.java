@@ -1,6 +1,9 @@
 package com.controle.estoque.service;
 
+import com.controle.estoque.model.Produto;
 import com.controle.estoque.model.SaidaDeProduto;
+import com.controle.estoque.model.Total;
+import com.controle.estoque.model.TotaldaVenda;
 import com.controle.estoque.repository.SaindaDeProdutoRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -54,5 +57,15 @@ public class SaidaDeProdutoService {
         }
    }
 
+   public BigDecimal lucro(BigDecimal valorDaCompra, BigDecimal valorDaVenda) throws Exception{
+       Produto produto = new Produto();
+       TotaldaVenda totaldaVenda = new TotaldaVenda();
+       BigDecimal valordaCompra = totaldaVenda.getTotalDaVenda();
+       BigDecimal ValordaVenda = produto.getValorDeCompra();
+
+       BigDecimal lucro = valorDaCompra.subtract(valorDaVenda);
+
+       return lucro;
+   }
 
 }

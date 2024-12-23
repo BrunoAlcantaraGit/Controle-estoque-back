@@ -69,4 +69,7 @@ public  ResponseEntity<BigDecimal>somarTotalVenda()throws Exception{
         }
 }
 
+
+
+
 }

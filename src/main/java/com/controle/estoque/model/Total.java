@@ -13,6 +13,7 @@ public class Total {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     BigDecimal total;
+    BigDecimal lucro;
 
     public BigDecimal getTotal() {
         return total;
@@ -20,6 +21,14 @@ public class Total {
 
     public void setTotal(BigDecimal total) {
         this.total = total;
+    }
+
+    public BigDecimal getLucro() {
+        return lucro;
+    }
+
+    public void setLucro(BigDecimal lucro) {
+        this.lucro = lucro;
     }
 
     public Long getId() {
