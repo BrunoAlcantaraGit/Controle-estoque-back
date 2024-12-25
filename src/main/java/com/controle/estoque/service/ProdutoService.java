@@ -22,7 +22,7 @@ public class ProdutoService {
 
     public Produto salvarProduto(Produto produto) throws Exception {
         Optional<Produto>  VerificarProduto= produtoRepository.findBycodigo(produto.getCodigo());
-        String validarCampoCodigoDoProduto = validarCodigo.validarNumero(produto.getCodigo());
+       //String validarCampoCodigoDoProduto = validarCodigo.validarNumero(produto.getCodigo());
 
         if (VerificarProduto.isEmpty()) {
             produto.setCodigo(validarCodigo.validarNumero(produto.getCodigo()));

@@ -1,8 +1,6 @@
 package com.controle.estoque.v1.controller;
 
-import com.controle.estoque.model.Categoria;
 import com.controle.estoque.model.Produto;
-import com.controle.estoque.model.Total;
 import com.controle.estoque.service.ProdutoService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;

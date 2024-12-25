@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import java.math.BigDecimal;
 
 @Entity
-public class Total {
+public class TotalDaCompra {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;

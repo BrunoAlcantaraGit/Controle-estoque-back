@@ -2,10 +2,10 @@ package com.controle.estoque.service;
 
 import com.controle.estoque.model.Produto;
 import com.controle.estoque.model.SaidaDeProduto;
-import com.controle.estoque.model.Total;
+import com.controle.estoque.model.TotalDaCompra;
 import com.controle.estoque.model.TotaldaVenda;
+import com.controle.estoque.repository.ProdutoRepository;
 import com.controle.estoque.repository.SaindaDeProdutoRepository;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -21,6 +20,7 @@ import java.util.Optional;
 public class SaidaDeProdutoService {
 
      SaindaDeProdutoRepository saidaRepository;
+     ProdutoRepository produtoRepository;
 
     public SaidaDeProduto salvarVenda(SaidaDeProduto saida){
         return saidaRepository.save(saida);
@@ -56,16 +56,33 @@ public class SaidaDeProdutoService {
             throw new Exception();
         }
    }
+//FAZER UM MAP PARA FILTRAR LISTA DE SAINDA
+   public BigDecimal lucro() throws Exception{
+        List<SaidaDeProduto>saidas = saidaRepository.findAll();
+        List<Produto>totalVendas = produtoRepository.findAll();
+        if(!saidas.isEmpty() && !totalVendas.isEmpty()){
 
-   public BigDecimal lucro(BigDecimal valorDaCompra, BigDecimal valorDaVenda) throws Exception{
-       Produto produto = new Produto();
-       TotaldaVenda totaldaVenda = new TotaldaVenda();
-       BigDecimal valordaCompra = totaldaVenda.getTotalDaVenda();
-       BigDecimal ValordaVenda = produto.getValorDeCompra();
+        BigDecimal TotaldeCompra = saidas.stream()
+                .map(saida->saida.getValorDaUnidade())
+                .filter(valordaUnidade->valordaUnidade !=null)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-       BigDecimal lucro = valorDaCompra.subtract(valorDaVenda);
+        BigDecimal totalDeVenda = totalVendas.stream()
+                .map(produto -> produto.getValorDaUnidade())
+                .filter(valorTotalDaCompra -> valorTotalDaCompra !=null)
+                .reduce(BigDecimal.ZERO,BigDecimal::add);
 
-       return lucro;
+
+        BigDecimal lucro = totalDeVenda.subtract(TotaldeCompra);
+
+        return  lucro;
+
+
+        }else {
+            throw new Exception("Não existe compras nem vendas para retornar o valor");
+        }
+
+
    }
 
 }
