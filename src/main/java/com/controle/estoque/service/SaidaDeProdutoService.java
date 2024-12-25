@@ -19,31 +19,32 @@ import java.util.List;
 @Data
 public class SaidaDeProdutoService {
 
-     SaindaDeProdutoRepository saidaRepository;
-     ProdutoRepository produtoRepository;
+    SaindaDeProdutoRepository saidaRepository;
+    ProdutoRepository produtoRepository;
 
-    public SaidaDeProduto salvarVenda(SaidaDeProduto saida){
+    public SaidaDeProduto salvarVenda(SaidaDeProduto saida) {
         return saidaRepository.save(saida);
     }
 
 
-    public List<SaidaDeProduto> listarTodasAsSaidas() throws Exception{
-        List<SaidaDeProduto>listaDeProduto = saidaRepository.findAll();
-        List<SaidaDeProduto>ListarOsProdutos = new ArrayList<>();
-        if(!listaDeProduto.isEmpty()){
-            for (SaidaDeProduto p : listaDeProduto){
-                ListarOsProdutos.add(p);}
+    public List<SaidaDeProduto> listarTodasAsSaidas() throws Exception {
+        List<SaidaDeProduto> listaDeProduto = saidaRepository.findAll();
+        List<SaidaDeProduto> ListarOsProdutos = new ArrayList<>();
+        if (!listaDeProduto.isEmpty()) {
+            for (SaidaDeProduto p : listaDeProduto) {
+                ListarOsProdutos.add(p);
+            }
 
-               return ListarOsProdutos;
-        }else {
+            return ListarOsProdutos;
+        } else {
             throw new Exception("Lista não contem Elementos");
         }
     }
 
 
-   public BigDecimal somarTotalVenda() throws Exception{
-        List<SaidaDeProduto>saidas = saidaRepository.findAll();
-        if (!saidas.isEmpty()){
+    public BigDecimal somarTotalVenda() throws Exception {
+        List<SaidaDeProduto> saidas = saidaRepository.findAll();
+        if (!saidas.isEmpty()) {
 
             BigDecimal total = saidas.stream()
                     .map(saida -> saida.getValorTotaldaVenda())
@@ -52,37 +53,35 @@ public class SaidaDeProdutoService {
 
             return total;
 
-        }else {
+        } else {
             throw new Exception();
         }
-   }
-//FAZER UM MAP PARA FILTRAR LISTA DE SAINDA
-   public BigDecimal lucro() throws Exception{
-        List<SaidaDeProduto>saidas = saidaRepository.findAll();
-        List<Produto>totalVendas = produtoRepository.findAll();
-        if(!saidas.isEmpty() && !totalVendas.isEmpty()){
+    }
 
-        BigDecimal TotaldeCompra = saidas.stream()
-                .map(saida->saida.getValorDaUnidade())
-                .filter(valordaUnidade->valordaUnidade !=null)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    //FAZER UM MAP PARA FILTRAR LISTA DE SAINDA
+    public BigDecimal lucroTotal() throws Exception {
+        List<SaidaDeProduto> saidas = saidaRepository.findAll();
 
-        BigDecimal totalDeVenda = totalVendas.stream()
-                .map(produto -> produto.getValorDaUnidade())
-                .filter(valorTotalDaCompra -> valorTotalDaCompra !=null)
-                .reduce(BigDecimal.ZERO,BigDecimal::add);
+        if (!saidas.isEmpty()) {
 
+            BigDecimal lucroTotal = saidas.stream()
+                    .map(saida -> saida.getLucroDaTransacao())
+                    .filter(LucroDaTransacao -> LucroDaTransacao != null)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        BigDecimal lucro = totalDeVenda.subtract(TotaldeCompra);
+            return lucroTotal;
 
-        return  lucro;
-
-
-        }else {
+        } else {
             throw new Exception("Não existe compras nem vendas para retornar o valor");
         }
 
+    }
 
-   }
+
+    public BigDecimal lucroPorTransacao(BigDecimal valorDaUnidadeDeCompra, BigDecimal ValordaUnidadeDeVendas, BigDecimal quantidadeDeVenda) throws Exception {
+        BigDecimal lucroDaTransacao = valorDaUnidadeDeCompra.subtract(ValordaUnidadeDeVendas).multiply(quantidadeDeVenda);
+
+        return lucroDaTransacao;
+    }
 
 }

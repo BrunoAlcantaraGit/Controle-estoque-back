@@ -71,10 +71,10 @@ public  ResponseEntity<BigDecimal>somarTotalVenda()throws Exception{
 
 
 
-@GetMapping("lucro")
-    public ResponseEntity<BigDecimal>lucro()throws Exception{
+@GetMapping("lucro-total")
+    public ResponseEntity<BigDecimal>lucroTotal()throws Exception{
         try {
-            return new ResponseEntity<>(saidaService.lucro(),HttpStatus.OK);
+            return new ResponseEntity<>(saidaService.lucroTotal(),HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
