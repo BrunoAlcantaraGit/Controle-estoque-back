@@ -1778,3 +1778,6 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
 	at com.controle.estoque.EstoqueApplication.main(EstoqueApplication.java:12)
+2024-12-29 20:18:00.982095-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]SAIDA_DE_PRODUTO"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
+SAIDA_DE_PRODUTO [42001-224]

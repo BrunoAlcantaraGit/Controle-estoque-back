@@ -8,6 +8,7 @@ public class SaidaDeProdutoDTO {
     private int quantidade;
     private BigDecimal valorDaUnidade;
     private BigDecimal valorTotaldaVenda;
+    private BigDecimal lucroDaTransacao;
     private Long produto;
     private Long cliente;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
@@ -67,5 +68,13 @@ public class SaidaDeProdutoDTO {
 
     public void setDataCadastro(String dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+
+    public BigDecimal getLucroDaTransacao() {
+        return lucroDaTransacao;
+    }
+
+    public void setLucroDaTransacao(BigDecimal lucroDaTransacao) {
+        this.lucroDaTransacao = lucroDaTransacao;
     }
 }

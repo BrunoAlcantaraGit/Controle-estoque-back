@@ -58,7 +58,7 @@ public class SaidaDeProdutoService {
         }
     }
 
-    //FAZER UM MAP PARA FILTRAR LISTA DE SAINDA
+
     public BigDecimal lucroTotal() throws Exception {
         List<SaidaDeProduto> saidas = saidaRepository.findAll();
 
@@ -77,11 +77,5 @@ public class SaidaDeProdutoService {
 
     }
 
-
-    public BigDecimal lucroPorTransacao(BigDecimal valorDaUnidadeDeCompra, BigDecimal ValordaUnidadeDeVendas, BigDecimal quantidadeDeVenda) throws Exception {
-        BigDecimal lucroDaTransacao = valorDaUnidadeDeCompra.subtract(ValordaUnidadeDeVendas).multiply(quantidadeDeVenda);
-
-        return lucroDaTransacao;
-    }
 
 }
