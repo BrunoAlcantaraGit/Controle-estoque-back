@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableFeignClients
 public class EstoqueApplication {
-
+	public String PORT = System.getenv("PORT");
 
 	public static void main(String[] args) {
 		SpringApplication.run(EstoqueApplication.class, args);
