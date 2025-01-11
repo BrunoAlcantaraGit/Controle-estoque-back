@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @SpringBootApplication
 @EnableFeignClients
-@OpenAPIDefinition(servers = {@Server(url = "/", description = "Default Server URL")})
+@OpenAPIDefinition(servers = {
+		@Server(url = "https://controle-estoque-back-production.up.railway.app", description = "Railway Server"),
+		@Server(url = "http://localhost:3000", description = "Local Server")
+})
 public class EstoqueApplication {
 
 	public String PORT = System.getenv("PORT");
