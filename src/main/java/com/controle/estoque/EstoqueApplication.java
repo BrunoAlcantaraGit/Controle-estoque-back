@@ -5,11 +5,13 @@ import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 @SpringBootApplication
 @EnableFeignClients
+@CrossOrigin
+@OpenAPIDefinition(servers = {@Server(url = "/", description = "Default Server URL")})
 public class EstoqueApplication {
 	public String PORT = System.getenv("PORT");
 
