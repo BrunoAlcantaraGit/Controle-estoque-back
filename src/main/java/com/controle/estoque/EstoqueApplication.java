@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @SpringBootApplication
 @EnableFeignClients
-@CrossOrigin
 @OpenAPIDefinition(servers = {@Server(url = "/", description = "Default Server URL")})
 public class EstoqueApplication {
 
