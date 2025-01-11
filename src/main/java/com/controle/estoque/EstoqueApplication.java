@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 
-@OpenAPIDefinition(servers = {@Server(url = "/", description = "Default Server URL")})
+
 @SpringBootApplication
 @EnableFeignClients
 public class EstoqueApplication {
