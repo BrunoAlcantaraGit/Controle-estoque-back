@@ -16,6 +16,7 @@ public class SaidaDeProduto {
     private BigDecimal valorDaUnidade;
     private BigDecimal valorTotaldaVenda;
     private BigDecimal lucroDaTransacao;
+    private BigDecimal valorDeCompra;
     @ManyToOne
     private Produto produto;
     @ManyToOne
@@ -26,6 +27,14 @@ public class SaidaDeProduto {
 
     public Long getId() {
         return id;
+    }
+
+    public BigDecimal getValorDeCompra() {
+        return valorDeCompra;
+    }
+
+    public void setValorDeCompra(BigDecimal valorDeCompra) {
+        this.valorDeCompra = valorDeCompra;
     }
 
     public BigDecimal getLucroDaTransacao() {

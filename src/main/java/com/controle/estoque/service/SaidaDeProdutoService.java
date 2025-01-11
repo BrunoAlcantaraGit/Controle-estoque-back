@@ -1,11 +1,8 @@
 package com.controle.estoque.service;
 
-import com.controle.estoque.model.Produto;
 import com.controle.estoque.model.SaidaDeProduto;
-import com.controle.estoque.model.TotalDaCompra;
-import com.controle.estoque.model.TotaldaVenda;
 import com.controle.estoque.repository.ProdutoRepository;
-import com.controle.estoque.repository.SaindaDeProdutoRepository;
+import com.controle.estoque.repository.SaidaDeProdutoRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
@@ -13,13 +10,14 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 @Data
 public class SaidaDeProdutoService {
 
-    SaindaDeProdutoRepository saidaRepository;
+    SaidaDeProdutoRepository saidaRepository;
     ProdutoRepository produtoRepository;
 
     public SaidaDeProduto salvarVenda(SaidaDeProduto saida) {
@@ -77,5 +75,33 @@ public class SaidaDeProdutoService {
 
     }
 
+    public Optional<SaidaDeProduto> listarSaidasPorId(Long id) throws Exception {
+        Optional<SaidaDeProduto> saidaDeProduto = saidaRepository.findById(id);
+        if (saidaDeProduto.isPresent()) {
+            return saidaDeProduto;
+        } else {
+            throw new Exception("produto inexistente ou id inválido");
+        }
+
+    }
+
+    public SaidaDeProduto atualizarSaida(Long id, SaidaDeProduto saidaDeProduto) throws Exception {
+        Optional<SaidaDeProduto> saida = saidaRepository.findById(id);
+        if (saida.isPresent()) {
+            return saidaDeProduto;
+        } else {
+            throw new Exception("Produto não existe na base");
+        }
+    }
+
+    public void deletarSaidaPorId(Long id) throws Exception{
+        Optional<SaidaDeProduto> saida = saidaRepository.findById(id);
+
+        if (saida.isPresent()) {
+            saidaRepository.deleteById(id);
+        }else {
+            throw new Exception("Id não localizado");
+        }
+    }
 
 }

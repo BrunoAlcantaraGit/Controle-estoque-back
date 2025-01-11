@@ -9,6 +9,7 @@ public class SaidaDeProdutoDTO {
     private BigDecimal valorDaUnidade;
     private BigDecimal valorTotaldaVenda;
     private BigDecimal lucroDaTransacao;
+    private BigDecimal valorDeCompra;
     private Long produto;
     private Long cliente;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
@@ -16,6 +17,14 @@ public class SaidaDeProdutoDTO {
 
     public Long getId() {
         return id;
+    }
+
+    public BigDecimal getValorDeCompra() {
+        return valorDeCompra;
+    }
+
+    public void setValorDeCompra(BigDecimal valorDeCompra) {
+        this.valorDeCompra = valorDeCompra;
     }
 
     public void setId(Long id) {
@@ -54,7 +63,7 @@ public class SaidaDeProdutoDTO {
         this.produto = produto;
     }
 
-    public Long getCliente() {
+    public long getCliente() {
         return cliente;
     }
 

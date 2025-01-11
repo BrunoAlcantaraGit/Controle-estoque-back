@@ -6,9 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
+
+@OpenAPIDefinition(servers = {@Server(url = "/", description = "Default Server URL")})
 @SpringBootApplication
 @EnableFeignClients
-@OpenAPIDefinition(servers = {@Server(url = "/myapp/", description = "Default Server URL")})
 public class EstoqueApplication {
 	public String PORT = System.getenv("PORT");
 
