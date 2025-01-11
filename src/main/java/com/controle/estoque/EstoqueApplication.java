@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin
 @OpenAPIDefinition(servers = {@Server(url = "/", description = "Default Server URL")})
 public class EstoqueApplication {
+
 	public String PORT = System.getenv("PORT");
 
 	public static void main(String[] args) {
