@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin
 @Data
 @AllArgsConstructor
+@CrossOrigin
 @RequestMapping("saida-produtos")
 public class SaidaDeProdutoController {
     SaidaDeProdutoService saidaService;

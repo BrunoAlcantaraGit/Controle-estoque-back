@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin
 @Data
+@CrossOrigin
 @RequestMapping("contato")
 public class ContatoController {
 
