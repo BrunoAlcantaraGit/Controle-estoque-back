@@ -4,12 +4,12 @@
 
 FROM ubuntu:latest AS build
 RUN apt-get update
-RUN apt-get install openjdk:22 -y
+RUN apt-get install openjdk:17 -y
 COPY . .
 RUN apt-get install maven -y
 RUN mvn clean install
 
-FROM openjdk:22
+FROM openjdk:17
 
 EXPOSE 3000
 
