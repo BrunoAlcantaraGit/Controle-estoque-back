@@ -21,7 +21,6 @@ public class ContatoService {
         Optional<Contato>validarContato = contatoRepository.findById(id);
         if (validarContato.isPresent()){
           Contato  contatoAtualizado = validarContato.get();
-          contatoAtualizado.setDdd(contato.getDdd());
           contatoAtualizado.setTelefone(contato.getTelefone());
           contatoAtualizado.setEmail(contato.getEmail());
           return contato;

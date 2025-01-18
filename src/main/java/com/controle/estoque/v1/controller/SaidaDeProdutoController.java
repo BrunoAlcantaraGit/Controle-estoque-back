@@ -36,8 +36,8 @@ public class SaidaDeProdutoController {
             Optional<Produto> produto = produtoService.listarPorId(saidaDeProdutoDTO.getProduto());
             Optional<Cliente> cliente = clienteService.listarPorId(saidaDeProdutoDTO.getCliente());
 
-
             SaidaDeProduto saidaDeProduto = new SaidaDeProduto();
+
             saidaDeProduto.setProduto(produto.orElse(null));
             saidaDeProduto.setCliente(cliente.orElse(null));
             saidaDeProduto.setQuantidade(saidaDeProdutoDTO.getQuantidade());
@@ -57,21 +57,22 @@ public class SaidaDeProdutoController {
 
     }
 
-    @PutMapping("atualizar/{id}")
+    @PutMapping("atualizarSaida/{id}")
     public ResponseEntity<SaidaDeProduto> atualizarSaida(@PathVariable Long id, @RequestBody SaidaDeProdutoDTO saidaDTO) throws Exception {
         try {
-            Optional<Produto> produto = produtoService.listarPorId(saidaDTO.getProduto());
+            Optional<SaidaDeProduto> saidaDeProduto = saidaService.listarSaidasPorId(id);
             Optional<Cliente> cliente = clienteService.listarPorId(saidaDTO.getCliente());
+            Optional<Produto>produdo = produtoService.listarPorId(saidaDTO.getProduto());
 
-            Optional<SaidaDeProduto> saidas = saidaRepository.findById(id);
-            SaidaDeProduto saidaAtualizada = saidas.get();
-            saidaAtualizada.setProduto(produto.orElse(null));
+            SaidaDeProduto saidaAtualizada = saidaDeProduto.get();
             saidaAtualizada.setCliente(cliente.orElse(null));
-            saidaAtualizada.setDataCadastro(saidaDTO.getDataCadastro());
+            saidaAtualizada.setProduto(produdo.orElse(null));
+            saidaAtualizada.setValorDaUnidade(saidaDTO.getValorDaUnidade());
             saidaAtualizada.setQuantidade(saidaDTO.getQuantidade());
-            saidaAtualizada.setValorTotaldaVenda(saidaDTO.getValorTotaldaVenda());
             saidaAtualizada.setLucroDaTransacao(saidaDTO.getLucroDaTransacao());
-            saidaAtualizada.setValorDeCompra(saidaDTO.getValorDeCompra());
+            saidaAtualizada.setValorTotaldaVenda(saidaDTO.getValorTotaldaVenda());
+            //saidaAtualizada.setValorDeCompra(saidaDTO.getValorDeCompra());
+
             return new ResponseEntity<>(saidaService.atualizarSaida(id, saidaAtualizada), HttpStatus.OK);
 
         } catch (Exception e) {

@@ -11,7 +11,6 @@ public class Contato {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String telefone;
-    private String ddd;
     private String email;
 
     public Long getId() {
@@ -30,13 +29,6 @@ public class Contato {
         this.telefone = telefone;
     }
 
-    public String getDdd() {
-        return ddd;
-    }
-
-    public void setDdd(String ddd) {
-        this.ddd = ddd;
-    }
 
     public String getEmail() {
         return email;

@@ -1,5 +1,6 @@
 package com.controle.estoque.service;
 
+import com.controle.estoque.model.Cliente;
 import com.controle.estoque.model.SaidaDeProduto;
 import com.controle.estoque.repository.ProdutoRepository;
 import com.controle.estoque.repository.SaidaDeProdutoRepository;
@@ -88,7 +89,7 @@ public class SaidaDeProdutoService {
     public SaidaDeProduto atualizarSaida(Long id, SaidaDeProduto saidaDeProduto) throws Exception {
         Optional<SaidaDeProduto> saida = saidaRepository.findById(id);
         if (saida.isPresent()) {
-            return saidaDeProduto;
+            return saidaRepository.save(saidaDeProduto);
         } else {
             throw new Exception("Produto não existe na base");
         }

@@ -28,4 +28,14 @@ public class EnderecoConfrollerFeing {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+@DeleteMapping("deletar/{id}")
+    public ResponseEntity deletarPorId(@PathVariable Long id)throws Exception{
+        try {
+            enderecoService.deletarPorId(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+        }
+}
 }

@@ -14,28 +14,39 @@ import java.util.Optional;
 @AllArgsConstructor
 @Data
 public class EnderecoService {
-EnderecoFeing enderecoFeing;
-   EnderecoRepository enderecoRepository;
+    EnderecoFeing enderecoFeing;
+    EnderecoRepository enderecoRepository;
 
-    public Endereco enderecoRequest(String cep){
+    public Endereco enderecoRequest(String cep) {
         return enderecoFeing.enderecoAPI(cep);
     }
 
     @Transactional
-    public Endereco atualizarEndereco(Endereco endereco,Long id) throws Exception{
-        Optional<Endereco>validarEndereco = enderecoRepository.findById(id);
-        if (validarEndereco.isPresent()){
+    public Endereco atualizarEndereco(Endereco endereco, Long id) throws Exception {
+        Optional<Endereco> validarEndereco = enderecoRepository.findById(id);
+        if (validarEndereco.isPresent()) {
             Endereco enderecoAtualizado = validarEndereco.get();
             enderecoAtualizado.setCep(endereco.getCep());
             enderecoAtualizado.setLogradouro(endereco.getLogradouro());
             enderecoAtualizado.setBairro(endereco.getBairro());
             enderecoAtualizado.setEstado(endereco.getEstado());
             enderecoAtualizado.setNumero(endereco.getNumero());
+            enderecoAtualizado.setComplemento(endereco.getComplemento());
 
             return endereco;
 
-        }else {
+        } else {
             throw new Exception("Endereco não existe");
+        }
+    }
+
+
+    public void deletarPorId(Long id) throws Exception {
+        Optional<Endereco> endereco = enderecoRepository.findById(id);
+        if (endereco.isPresent()) {
+            enderecoRepository.deleteById(id);
+        } else {
+            throw new Exception("Id não localizado");
         }
     }
 

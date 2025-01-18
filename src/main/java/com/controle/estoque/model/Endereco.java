@@ -16,9 +16,18 @@ private String logradouro;
 private String bairro;
 private String estado;
 private String ibge;
+private String complemento;
 
     public Long getId() {
         return id;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
     }
 
     public String getNumero() {
