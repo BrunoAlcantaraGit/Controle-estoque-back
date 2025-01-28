@@ -2,6 +2,7 @@ package com.controle.estoque.v1.controller;
 
 
 import com.controle.estoque.model.Cliente;
+import com.controle.estoque.v1.dto.ClienteDTO;
 import com.controle.estoque.service.ClienteService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,14 +32,6 @@ public class ClienteController {
         }
     }
 
-    @GetMapping("listar")
-    public ResponseEntity<List<Cliente>> listarTudo() throws Exception {
-        try {
-            return new ResponseEntity<>(clienteService.listarTudo(), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
 
     @DeleteMapping("deletar/{id}")
     public ResponseEntity deletarPoId(@PathVariable Long id) throws Exception {
@@ -63,6 +56,15 @@ public class ClienteController {
     public ResponseEntity<Optional<Cliente>> listarPorId(@PathVariable Long id)throws Exception{
         try {
             return new ResponseEntity<>(clienteService.listarPorId(id),HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("listarDTO")
+    public ResponseEntity<List<ClienteDTO>>listarDTO()throws Exception{
+        try {
+         return new ResponseEntity<>(clienteService.listarTudoDTO(),HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

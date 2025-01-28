@@ -1,12 +1,13 @@
 package com.controle.estoque.service;
 
 import com.controle.estoque.model.Cliente;
+import com.controle.estoque.model.Endereco;
 import com.controle.estoque.repository.ClienteRepository;
+import com.controle.estoque.v1.dto.ClienteDTO;
+import com.controle.estoque.v1.dto.EnderecoDTO;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,6 +23,7 @@ import java.util.Optional;
 public class ClienteService {
     @Autowired
     ClienteRepository clienteRepository;
+    EnderecoService enderecoService;
 
 
     public Cliente salvar(Cliente cliente) throws Exception {
@@ -33,50 +35,61 @@ public class ClienteService {
         }
     }
 
-    public List<Cliente> listarTudo() throws Exception {
-        List<Cliente> validarClientes = clienteRepository.findAll();
-        if (!validarClientes.isEmpty()) {
-            List<Cliente> listarClientes = new ArrayList<>();
-            for (Cliente c : validarClientes) {
-                listarClientes.add(c);
-            }
-            return listarClientes;
-        } else {
-            throw new Exception("Lista não contem elementos");
-        }
-    }
+
+
     @Transactional
-    public void deletarPoId(Long id) throws  Exception{
+    public void deletarPoId(Long id) throws Exception {
         Optional<Cliente> validarCliente = clienteRepository.findById(id);
-        if(validarCliente.isPresent()){
-        clienteRepository.deleteById(id);
-        }else {
+        if (validarCliente.isPresent()) {
+            clienteRepository.deleteById(id);
+        } else {
             throw new Exception("Id não localizado no banco de dados");
         }
     }
 
     @Transactional
-    public Cliente editarCliente(Long id, Cliente cliente)throws Exception{
-        Optional<Cliente>validarCliente = clienteRepository.findById(id);
-        if(validarCliente.isPresent()){
+    public Cliente editarCliente(Long id, Cliente cliente) throws Exception {
+        Optional<Cliente> validarCliente = clienteRepository.findById(id);
+        if (validarCliente.isPresent()) {
             Cliente clienteAtualizado = validarCliente.get();
             clienteAtualizado.setNome(cliente.getNome());
             clienteAtualizado.setDocumento(cliente.getDocumento());
 
             return cliente;
-        }else {
+        } else {
             throw new Exception("id não localizado no banco");
         }
     }
 
 
-    public Optional<Cliente> listarPorId(long id) throws Exception{
+    public Optional<Cliente> listarPorId(long id) throws Exception {
         Optional<Cliente> verificarCliente = clienteRepository.findById(id);
-        if (verificarCliente.isPresent()){
+        if (verificarCliente.isPresent()) {
             return clienteRepository.findById(id);
-        }else {
+        } else {
             throw new Exception();
         }
     }
+
+
+    public List<ClienteDTO> listarTudoDTO() throws Exception {
+        List<Cliente> validarClientes = clienteRepository.findAll();
+
+        if (!validarClientes.isEmpty()) {
+            List<ClienteDTO> clientesDTO = new ArrayList<>();
+            EnderecoDTO enderecoDTO = new EnderecoDTO();
+
+            for (Cliente c : validarClientes) {
+                enderecoDTO.setLogradouro(c.getEndereco().getLogradouro());
+                ClienteDTO clienteDTo = new ClienteDTO(c.getNome(),c.getDocumento(),enderecoDTO);
+                clientesDTO.add(clienteDTo);
+            }
+
+            return clientesDTO;
+        } else {
+            throw new Exception("Lista não contem elementos");
+        }
+    }
+
 
 }

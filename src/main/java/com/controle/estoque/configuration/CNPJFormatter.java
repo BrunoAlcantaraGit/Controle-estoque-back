@@ -1,9 +1,11 @@
 package com.controle.estoque.configuration;
 
 
+import org.springframework.context.annotation.Configuration;
+
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-
+@Configuration
 public class CNPJFormatter {
 
     public String formatarCNPJ(String cnpj) {
