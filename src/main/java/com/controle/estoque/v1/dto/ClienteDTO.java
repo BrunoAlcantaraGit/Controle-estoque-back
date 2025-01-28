@@ -9,11 +9,12 @@ public class ClienteDTO {
     private EnderecoDTO endereco;
 
 
-    public ClienteDTO( String nome, String documento, EnderecoDTO endereco) {
+    public ClienteDTO( Long id,  String nome, String documento, EnderecoDTO endereco) {
 
         this.nome = nome;
         this.documento = documento;
         this.endereco = endereco;
+        this.id= id;
     }
 
     public Long getId() {

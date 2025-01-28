@@ -81,7 +81,9 @@ public class ClienteService {
 
             for (Cliente c : validarClientes) {
                 enderecoDTO.setLogradouro(c.getEndereco().getLogradouro());
-                ClienteDTO clienteDTo = new ClienteDTO(c.getNome(),c.getDocumento(),enderecoDTO);
+                enderecoDTO.setId(c.getEndereco().getId());
+
+                ClienteDTO clienteDTo = new ClienteDTO(c.getId(),c.getNome(),c.getDocumento(),enderecoDTO);
                 clientesDTO.add(clienteDTo);
             }
 
