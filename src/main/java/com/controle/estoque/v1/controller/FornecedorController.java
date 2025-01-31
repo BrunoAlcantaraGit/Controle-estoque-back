@@ -3,6 +3,7 @@ package com.controle.estoque.v1.controller;
 
 import com.controle.estoque.model.Fornecedor;
 import com.controle.estoque.service.FornecedorService;
+import com.controle.estoque.v1.dto.FornecedorDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,56 +18,60 @@ import java.util.Optional;
 @CrossOrigin
 @RequestMapping("/fornecedores")
 public class FornecedorController {
-   @Autowired
+    @Autowired
     FornecedorService fornecedorService;
 
-    private  static final Logger logger = LoggerFactory.getLogger(FornecedorController.class);
+    private static final Logger logger = LoggerFactory.getLogger(FornecedorController.class);
 
     @PostMapping("/salvar")
-    public ResponseEntity<Fornecedor> salvar(@RequestBody Fornecedor fornecedor) throws Exception{
-        logger.info("Dados do front: {}",fornecedor);
+    public ResponseEntity<Fornecedor> salvar(@RequestBody Fornecedor fornecedor) throws Exception {
+        logger.info("Dados do front: {}", fornecedor);
         try {
-        return  new ResponseEntity<>(fornecedorService.salvar(fornecedor), HttpStatus.CREATED);
-        }catch (Exception e){
+            return new ResponseEntity<>(fornecedorService.salvar(fornecedor), HttpStatus.CREATED);
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
 
         }
     }
-    @PutMapping("atualizar/{id}")
-    public ResponseEntity<Fornecedor>ataulizarPorId(@PathVariable Long id, @RequestBody Fornecedor fornecedor) throws  Exception{
-       try {
-        return new ResponseEntity<>(fornecedorService.ataulizarPorId(fornecedor, id),HttpStatus.OK);
-       }catch (Exception e){
-           e.printStackTrace();
-           return new ResponseEntity<>(HttpStatus.CONFLICT);
-       }
-    }
 
-    @GetMapping("/listar-tudo")
-    public ResponseEntity<List<Fornecedor>>listarTudo()throws Exception{
+    @PutMapping("atualizar/{id}")
+    public ResponseEntity<Fornecedor> ataulizarPorId(@PathVariable Long id, @RequestBody Fornecedor fornecedor) throws Exception {
         try {
-            return new ResponseEntity<>(fornecedorService.listarTudo(),HttpStatus.OK);
-        }catch (Exception e){
+            return new ResponseEntity<>(fornecedorService.ataulizarPorId(fornecedor, id), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
-@GetMapping("/listar/{id}")
-    public ResponseEntity<Optional<Fornecedor>>listarPorId(@PathVariable Long id) throws Exception{
+
+
+    @GetMapping("/listar/{id}")
+    public ResponseEntity<Optional<Fornecedor>> listarPorId(@PathVariable Long id) throws Exception {
         try {
-            return new ResponseEntity<>(fornecedorService.listarPorId(id),HttpStatus.OK);
-        }catch (Exception e){
+            return new ResponseEntity<>(fornecedorService.listarPorId(id), HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-@DeleteMapping("deletar/{id}")
-    public ResponseEntity<Fornecedor>deletarPorId(@PathVariable Long id)throws Exception{
-     try {
-         fornecedorService.deletarPorId(id);
-         return new ResponseEntity<>(HttpStatus.OK);
-     }catch (Exception e ){
-         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-     }
-}
+    @DeleteMapping("deletar/{id}")
+    public ResponseEntity<Fornecedor> deletarPorId(@PathVariable Long id) throws Exception {
+        try {
+            fornecedorService.deletarPorId(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("listartudoDTO")
+    public ResponseEntity<List<FornecedorDTO>> listarTudoDTO() throws Exception {
+        try {
+            return new ResponseEntity<>(fornecedorService.listarTudoDTO(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
