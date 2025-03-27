@@ -24,6 +24,7 @@ public class ProdutoController implements WebMvcConfigurer {
     ProdutoService produtoService;
 
 
+
     @PostMapping("/salvar")
     public ResponseEntity<Produto> salvarProduto(@RequestBody Produto produto) throws Exception {
         try {
@@ -34,69 +35,79 @@ public class ProdutoController implements WebMvcConfigurer {
         }
     }
 
+    /***
+     * Verificar a entrada do parametros '' Authorization''
+     * a api não está identificando o parametros de entrada
+     *
+     */
+    @GetMapping("/listar-tudo")
+    public ResponseEntity<List<Produto>> listarTudo() throws Exception {// /
+        try {
+            return new ResponseEntity<>(produtoService.listarTudo(), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+         return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-@GetMapping("listar-tudo")
-    public ResponseEntity<List<Produto>>listarTudo()throws Exception{
-      try {
-          return new ResponseEntity<>(produtoService.listarTudo(),HttpStatus.OK);
-      }catch (Exception e){
-      //    e.printStackTrace();
-         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-      }
-}
-@Transactional
-@GetMapping("listar/{id}")
-    public ResponseEntity<Optional<Produto>> listarPorId(@PathVariable Long id) throws Exception{
-      try {
-         return new ResponseEntity<>(produtoService.listarPorId(id),HttpStatus.OK);
-      }catch (Exception e){
-        //  e.printStackTrace();
-        return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
-      }
-}
+        }
+    }
+
+
+
+    @Transactional
+    @GetMapping("listar/{id}")
+    public ResponseEntity<Optional<Produto>> listarPorId(@PathVariable Long id) throws Exception {
+        try {
+            return new ResponseEntity<>(produtoService.listarPorId(id), HttpStatus.OK);
+        } catch (Exception e) {
+            //  e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
 
     @PutMapping("atualizar/{id}")
-    public ResponseEntity<Produto>EditarPorId(@PathVariable Long id, @RequestBody Produto produto) throws Exception {
+    public ResponseEntity<Produto> EditarPorId(@PathVariable Long id, @RequestBody Produto produto) throws Exception {
         try {
-            return new ResponseEntity<>(produtoService.EditarPorId(id,produto),HttpStatus.OK);
+            return new ResponseEntity<>(produtoService.EditarPorId(id, produto), HttpStatus.OK);
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
     @Transactional
     @DeleteMapping("deletar/{id}")
-    public ResponseEntity deletarId(@PathVariable Long id) throws Exception{
+    public ResponseEntity deletarId(@PathVariable Long id) throws Exception {
         try {
             produtoService.deletarID(id);
             return new ResponseEntity<>(HttpStatus.OK);
-        }catch (Exception e){
-          //  e.printStackTrace();
+        } catch (Exception e) {
+            //  e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
     }
+
     @Transactional
     @GetMapping("somar-total-produtos")
-    public ResponseEntity<BigDecimal>somarTotalProdutos()throws Exception{
-        try{
-            return new ResponseEntity<>(produtoService.somarTotalProdutos(),HttpStatus.OK);
-        }catch (Exception e){
+    public ResponseEntity<BigDecimal> somarTotalProdutos() throws Exception {
+        try {
+            return new ResponseEntity<>(produtoService.somarTotalProdutos(), HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @Transactional
     @GetMapping("calcular-total-do-produto/{quanitidade}/{valorDaUnidade}")
-    public ResponseEntity<BigDecimal> valorTotalDoProduto(@PathVariable BigDecimal quanitidade, @PathVariable BigDecimal valorDaUnidade) throws Exception{
-      try {
-          return new ResponseEntity<>(produtoService.valorTotalDoProduto(quanitidade,valorDaUnidade),HttpStatus.OK);
-      }catch (Exception e){
-        //  e.printStackTrace();
-          return new ResponseEntity<>(HttpStatus.CONFLICT);
-      }
+    public ResponseEntity<BigDecimal> valorTotalDoProduto(@PathVariable BigDecimal quanitidade, @PathVariable BigDecimal valorDaUnidade) throws Exception {
+        try {
+            return new ResponseEntity<>(produtoService.valorTotalDoProduto(quanitidade, valorDaUnidade), HttpStatus.OK);
+        } catch (Exception e) {
+            //  e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
     }
 
 }

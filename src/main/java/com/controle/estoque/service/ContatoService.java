@@ -16,7 +16,7 @@ import java.util.Optional;
 public class ContatoService {
     @Autowired
     ContatoRepository contatoRepository;
-   @Transactional
+    @Transactional
     public Contato atualizarcontato(Contato contato,Long id)throws Exception{
         Optional<Contato>validarContato = contatoRepository.findById(id);
         if (validarContato.isPresent()){

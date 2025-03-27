@@ -16,8 +16,14 @@ public class EnderecoConfrollerFeing {
     EnderecoService enderecoService;
 
     @GetMapping("endereco-api/{cep}")
-    public ResponseEntity<Endereco> retornoEndereco(@PathVariable String cep){
-        return new ResponseEntity<>(enderecoService.enderecoRequest(cep), HttpStatus.CREATED);
+    public ResponseEntity<Endereco> retornoEndereco(@PathVariable String cep) throws Exception{
+       try {
+           return new ResponseEntity<>(enderecoService.enderecoRequest(cep), HttpStatus.CREATED);
+       }catch (Exception e){
+           e.printStackTrace();
+           return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+       }
+
     }
 
     @PutMapping("atualizar-endereco/{id}")

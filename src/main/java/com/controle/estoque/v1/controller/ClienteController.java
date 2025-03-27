@@ -1,6 +1,7 @@
 package com.controle.estoque.v1.controller;
 
 
+
 import com.controle.estoque.model.Cliente;
 import com.controle.estoque.v1.dto.ClienteDTO;
 import com.controle.estoque.service.ClienteService;
@@ -22,8 +23,8 @@ public class ClienteController {
     ClienteService clienteService;
 
 
-    @PostMapping("salvar")
-    public ResponseEntity<Cliente> salvar(@RequestBody Cliente cliente) throws Exception {
+    @PostMapping("salvar/")
+    public ResponseEntity<Cliente> salvar(@RequestBody Cliente cliente ) throws Exception {
         try {
             return new ResponseEntity<>(clienteService.salvar(cliente), HttpStatus.CREATED);
         } catch (Exception e) {

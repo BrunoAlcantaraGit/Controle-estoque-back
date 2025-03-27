@@ -51,6 +51,7 @@ public class EnderecoService {
             throw new Exception("Id não localizado");
         }
     }
+
 public List<Endereco>  listarEnderecos()throws Exception{
      List<Endereco>  enderecos = enderecoRepository.findAll();
      if (!enderecos.isEmpty()){

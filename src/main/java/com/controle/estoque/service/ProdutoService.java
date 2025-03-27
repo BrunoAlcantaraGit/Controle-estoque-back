@@ -85,11 +85,11 @@ public class ProdutoService {
     }
 
     public BigDecimal somarTotalProdutos() throws Exception{
-        List<Produto> validarProdutos = produtoRepository.findAll();
+        List<Produto> produtos = produtoRepository.findAll();
 
-        if(!validarProdutos.isEmpty()){
+        if(!produtos.isEmpty()){
 
-              BigDecimal totals = validarProdutos.stream()
+              BigDecimal totals = produtos.stream()
                       .map(produto -> produto.getValorDeCompra())
                       .filter(valorDeCompra -> valorDeCompra  != null)
                       .reduce(BigDecimal.ZERO, BigDecimal::add);
