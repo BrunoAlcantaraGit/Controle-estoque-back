@@ -23,25 +23,6 @@ public class EnderecoService {
         return enderecoFeing.enderecoAPI(cep);
     }
 
-    @Transactional
-    public Endereco atualizarEndereco(Endereco endereco, Long id) throws Exception {
-        Optional<Endereco> validarEndereco = enderecoRepository.findById(id);
-        if (validarEndereco.isPresent()) {
-            Endereco enderecoAtualizado = validarEndereco.get();
-            enderecoAtualizado.setCep(endereco.getCep());
-            enderecoAtualizado.setLogradouro(endereco.getLogradouro());
-            enderecoAtualizado.setBairro(endereco.getBairro());
-            enderecoAtualizado.setEstado(endereco.getEstado());
-            enderecoAtualizado.setNumero(endereco.getNumero());
-            enderecoAtualizado.setComplemento(endereco.getComplemento());
-
-            return endereco;
-
-        } else {
-            throw new Exception("Endereco não existe");
-        }
-    }
-
 
     public void deletarPorId(Long id) throws Exception {
         Optional<Endereco> endereco = enderecoRepository.findById(id);

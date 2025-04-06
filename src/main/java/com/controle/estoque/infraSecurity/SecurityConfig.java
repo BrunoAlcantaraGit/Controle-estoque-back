@@ -37,6 +37,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/auth/register").permitAll()
                         .requestMatchers("/fornecedores/**").authenticated()
                         .requestMatchers("/endereco/**").authenticated()
+                        .requestMatchers("/h2-console/**").permitAll()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();

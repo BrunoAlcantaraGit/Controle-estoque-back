@@ -1,7 +1,9 @@
 package com.controle.estoque.service;
 
+import com.controle.estoque.model.Contato;
 import com.controle.estoque.model.Endereco;
 import com.controle.estoque.model.Fornecedor;
+import com.controle.estoque.repository.ContatoRepository;
 import com.controle.estoque.repository.EnderecoRepository;
 import com.controle.estoque.repository.FornecedorRepository;
 import com.controle.estoque.v1.dto.EnderecoDTO;
@@ -9,6 +11,7 @@ import com.controle.estoque.v1.dto.FornecedorDTO;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -21,8 +24,12 @@ import java.util.Optional;
 @AllArgsConstructor
 @CrossOrigin
 public class FornecedorService {
-
+    @Autowired
     FornecedorRepository fornecedorRepository;
+    @Autowired
+    EnderecoRepository enderecoRepository;
+    @Autowired
+    ContatoRepository contatoRepository;
 
 
     public Fornecedor salvar(Fornecedor fornecedor) throws Exception {
@@ -36,14 +43,31 @@ public class FornecedorService {
 
     @Transactional
     public Fornecedor ataulizarPorId(Fornecedor fornecedor, Long id) throws Exception {
-        Optional<Fornecedor> verificarDocumento = fornecedorRepository.findBydocumento(fornecedor.getDocumento());
-
+        Optional<Fornecedor> verificarDocumento = fornecedorRepository.findById(id);
+        Optional<Endereco> buscarEndereco = enderecoRepository.findById(id);
+        Optional<Contato> bucarContato = contatoRepository.findById(id);
         if (verificarDocumento.isPresent()) {
 
             Fornecedor fornecedorAtualizado = verificarDocumento.get();
             fornecedorAtualizado.setCpf(fornecedor.getDocumento());
             fornecedorAtualizado.setNome(fornecedor.getNome());
-            return fornecedor;
+
+            Endereco enderecoAtualizado = buscarEndereco.get();
+            enderecoAtualizado.setLogradouro(fornecedor.getEndereco().getLogradouro());
+            enderecoAtualizado.setEstado(fornecedor.getEndereco().getEstado());
+            enderecoAtualizado.setBairro(fornecedor.getEndereco().getBairro());
+            enderecoAtualizado.setNumero(fornecedor.getEndereco().getNumero());
+            enderecoAtualizado.setComplemento(fornecedor.getEndereco().getComplemento());
+
+            Contato contatoAtualizado = bucarContato.get();
+            contatoAtualizado.setTelefone(fornecedor.getContato().getTelefone());
+            contatoAtualizado.setEmail(fornecedor.getContato().getEmail());
+
+            contatoRepository.save(contatoAtualizado);
+            enderecoRepository.save(enderecoAtualizado);
+            return fornecedorRepository.save(fornecedorAtualizado);
+
+
         } else {
             throw new Exception("CNPJ não cadastrado");
         }
