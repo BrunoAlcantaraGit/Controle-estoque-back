@@ -65,7 +65,7 @@ public class FornecedorController {
         }
     }
 
-    @GetMapping("listartudoDTO")
+    @GetMapping("listartudo")
     public ResponseEntity<List<FornecedorDTO>> listarTudoDTO() throws Exception {
         try {
             return new ResponseEntity<>(fornecedorService.listarTudoDTO(), HttpStatus.OK);

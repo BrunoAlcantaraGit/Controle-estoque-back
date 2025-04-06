@@ -75,13 +75,8 @@ public class FornecedorService {
 
         if (!fornecedores.isEmpty()) {
             List<FornecedorDTO> fornecedoresDTO = new ArrayList<>();
-            EnderecoDTO enderecoDTO = new EnderecoDTO();
-
             for (Fornecedor f : fornecedores) {
-                enderecoDTO.setId(f.getEndereco().getId());
-                enderecoDTO.setLogradouro(f.getEndereco().getLogradouro());
-
-                FornecedorDTO fornecedorDTO = new FornecedorDTO(f.getId(), f.getNome(), f.getDocumento(), enderecoDTO);
+                FornecedorDTO fornecedorDTO = new FornecedorDTO(f.getId(),f.getNome(),f.getDocumento(),f.getContato().getEmail(), f.getContato().getTelefone());
                 fornecedoresDTO.add(fornecedorDTO);
             }
             return fornecedoresDTO;
