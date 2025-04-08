@@ -25,4 +25,24 @@ class ClienteServiceTest {
     @Test
     void listarTudoDTO() {
     }
+
+    @Test
+    void testSalvar() {
+    }
+
+    @Test
+    void testDeletarPoId() {
+    }
+
+    @Test
+    void testEditarCliente() {
+    }
+
+    @Test
+    void testListarPorId() {
+    }
+
+    @Test
+    void listarClientes() {
+    }
 }

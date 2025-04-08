@@ -1,8 +1,11 @@
 package com.controle.estoque.service;
 
 import com.controle.estoque.model.Cliente;
+import com.controle.estoque.model.Contato;
 import com.controle.estoque.model.Endereco;
 import com.controle.estoque.repository.ClienteRepository;
+import com.controle.estoque.repository.ContatoRepository;
+import com.controle.estoque.repository.EnderecoRepository;
 import com.controle.estoque.v1.dto.ClienteDTO;
 import com.controle.estoque.v1.dto.EnderecoDTO;
 import jakarta.transaction.Transactional;
@@ -23,7 +26,10 @@ import java.util.Optional;
 public class ClienteService {
     @Autowired
     ClienteRepository clienteRepository;
-    EnderecoService enderecoService;
+    @Autowired
+    EnderecoRepository enderecoRepository;
+    @Autowired
+    ContatoRepository contatoRepository;
 
 
     public Cliente salvar(Cliente cliente) throws Exception {
@@ -48,14 +54,30 @@ public class ClienteService {
     }
 
     @Transactional
-    public Cliente editarCliente(Long id, Cliente cliente) throws Exception {
-        Optional<Cliente> validarCliente = clienteRepository.findById(id);
-        if (validarCliente.isPresent()) {
-            Cliente clienteAtualizado = validarCliente.get();
-            clienteAtualizado.setNome(cliente.getNome());
-            clienteAtualizado.setDocumento(cliente.getDocumento());
+    public Cliente editarCliente(Long id, Cliente clienteAtual) throws Exception {
+        Optional<Cliente> cliente = clienteRepository.findById(id);
+        Optional<Endereco> endereco = enderecoRepository.findById(id);
+        Optional<Contato> contato = contatoRepository.findById(id);
 
-            return cliente;
+        if (cliente.isPresent()) {
+            Cliente clienteatualizado = cliente.get();
+            clienteatualizado.setNome(clienteAtual.getNome());
+            clienteatualizado.setDocumento(clienteAtual.getDocumento());
+
+            Endereco enderecoAtualizado = endereco.get();
+            enderecoAtualizado.setLogradouro(clienteAtual.getEndereco().getLogradouro());
+            enderecoAtualizado.setComplemento(clienteAtual.getEndereco().getComplemento());
+            enderecoAtualizado.setBairro(clienteAtual.getEndereco().getBairro());
+            enderecoAtualizado.setEstado(clienteAtual.getEndereco().getEstado());
+            enderecoAtualizado.setNumero(clienteAtual.getEndereco().getNumero());
+
+            Contato contatoAtualizado= contato.get();
+            contatoAtualizado.setEmail(clienteAtual.getContato().getEmail());
+            contatoAtualizado.setTelefone(clienteAtual.getContato().getTelefone());
+
+            contatoRepository.save(contatoAtualizado);
+            enderecoRepository.save(enderecoAtualizado);
+            return clienteRepository.save(clienteatualizado);
         } else {
             throw new Exception("id não localizado no banco");
         }
