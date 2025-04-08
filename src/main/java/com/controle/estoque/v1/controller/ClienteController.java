@@ -42,7 +42,7 @@ public class ClienteController {
         }
     }
 
-    @PutMapping("/editar/{id}")
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<Cliente> editarPorId(@PathVariable Long id, @RequestBody Cliente cliente) throws Exception {
         try {
     return new ResponseEntity<>(clienteService.editarCliente(id,cliente),HttpStatus.OK);
