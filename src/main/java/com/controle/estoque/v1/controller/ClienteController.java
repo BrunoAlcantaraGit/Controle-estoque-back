@@ -1,7 +1,5 @@
 package com.controle.estoque.v1.controller;
 
-
-
 import com.controle.estoque.model.Cliente;
 import com.controle.estoque.v1.dto.ClienteDTO;
 import com.controle.estoque.service.ClienteService;
@@ -62,10 +60,10 @@ public class ClienteController {
         }
     }
 
-    @GetMapping("listarDTO")
-    public ResponseEntity<List<ClienteDTO>>listarDTO()throws Exception{
+    @GetMapping("listar-clientes")
+    public ResponseEntity<List<ClienteDTO>>listarClientes()throws Exception{
         try {
-         return new ResponseEntity<>(clienteService.listarTudoDTO(),HttpStatus.OK);
+         return new ResponseEntity<>(clienteService.listarClientes(),HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

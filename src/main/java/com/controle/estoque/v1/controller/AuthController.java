@@ -6,6 +6,7 @@ import com.controle.estoque.repository.UserRepository;
 import com.controle.estoque.v1.dto.LoginRequestDTO;
 import com.controle.estoque.v1.dto.RegisterDTO;
 import com.controle.estoque.v1.dto.ResponseDTO;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/auth")
+
 public class AuthController {
 
     private final UserRepository userRepository;

@@ -72,18 +72,14 @@ public class ClienteService {
     }
 
 
-    public List<ClienteDTO> listarTudoDTO() throws Exception {
+    public List<ClienteDTO> listarClientes() throws Exception {
         List<Cliente> validarClientes = clienteRepository.findAll();
 
         if (!validarClientes.isEmpty()) {
             List<ClienteDTO> clientesDTO = new ArrayList<>();
-            EnderecoDTO enderecoDTO = new EnderecoDTO();
 
             for (Cliente c : validarClientes) {
-                enderecoDTO.setLogradouro(c.getEndereco().getLogradouro());
-                enderecoDTO.setId(c.getEndereco().getId());
-
-                ClienteDTO clienteDTo = new ClienteDTO(c.getId(),c.getNome(),c.getDocumento(),enderecoDTO);
+                ClienteDTO clienteDTo = new ClienteDTO(c.getId(),c.getNome(),c.getDocumento(), c.getContato().getTelefone(),c.getContato().getEmail());
                 clientesDTO.add(clienteDTo);
             }
 
