@@ -54,7 +54,7 @@ public class ProdutoController implements WebMvcConfigurer {
 
 
     @Transactional
-    @GetMapping("listar/{id}")
+    @GetMapping("/listar/{id}")
     public ResponseEntity<Optional<Produto>> listarPorId(@PathVariable Long id) throws Exception {
         try {
             return new ResponseEntity<>(produtoService.listarPorId(id), HttpStatus.OK);
@@ -65,7 +65,7 @@ public class ProdutoController implements WebMvcConfigurer {
     }
 
 
-    @PutMapping("atualizar/{id}")
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<Produto> EditarPorId(@PathVariable Long id, @RequestBody Produto produto) throws Exception {
         try {
             return new ResponseEntity<>(produtoService.EditarPorId(id, produto), HttpStatus.OK);
@@ -77,7 +77,7 @@ public class ProdutoController implements WebMvcConfigurer {
     }
 
     @Transactional
-    @DeleteMapping("deletar/{id}")
+    @DeleteMapping("/deletar/{id}")
     public ResponseEntity deletarId(@PathVariable Long id) throws Exception {
         try {
             produtoService.deletarID(id);
@@ -90,7 +90,7 @@ public class ProdutoController implements WebMvcConfigurer {
     }
 
     @Transactional
-    @GetMapping("somar-total-produtos")
+    @GetMapping("/somar-total-produtos")
     public ResponseEntity<BigDecimal> somarTotalProdutos() throws Exception {
         try {
             return new ResponseEntity<>(produtoService.somarTotalProdutos(), HttpStatus.OK);
@@ -100,7 +100,7 @@ public class ProdutoController implements WebMvcConfigurer {
     }
 
     @Transactional
-    @GetMapping("calcular-total-do-produto/{quanitidade}/{valorDaUnidade}")
+    @GetMapping("/calcular-total-do-produto/{quanitidade}/{valorDaUnidade}")
     public ResponseEntity<BigDecimal> valorTotalDoProduto(@PathVariable BigDecimal quanitidade, @PathVariable BigDecimal valorDaUnidade) throws Exception {
         try {
             return new ResponseEntity<>(produtoService.valorTotalDoProduto(quanitidade, valorDaUnidade), HttpStatus.OK);

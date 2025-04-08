@@ -1,5 +1,4 @@
 package com.controle.estoque.service;
-
 import com.controle.estoque.model.Contato;
 import com.controle.estoque.model.Endereco;
 import com.controle.estoque.model.Fornecedor;
@@ -18,8 +17,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-
 @Service
 @AllArgsConstructor
 @CrossOrigin

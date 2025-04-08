@@ -25,7 +25,7 @@ public class FornecedorController {
 
     @PostMapping("/salvar")
     public ResponseEntity<Fornecedor> salvar(@RequestBody Fornecedor fornecedor) throws Exception {
-        logger.info("Dados do front: {}", fornecedor);
+
         try {
             return new ResponseEntity<>(fornecedorService.salvar(fornecedor), HttpStatus.CREATED);
         } catch (Exception e) {
