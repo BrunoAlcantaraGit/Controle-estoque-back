@@ -3,8 +3,6 @@ package com.controle.estoque.v1.controller;
 import com.controle.estoque.model.Cliente;
 import com.controle.estoque.v1.dto.ClienteDTO;
 import com.controle.estoque.service.ClienteService;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

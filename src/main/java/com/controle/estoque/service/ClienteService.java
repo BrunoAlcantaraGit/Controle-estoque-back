@@ -53,6 +53,7 @@ public class ClienteService {
         }
     }
 
+
     @Transactional
     public Cliente editarCliente(Long id, Cliente clienteAtual) throws Exception {
         Optional<Cliente> cliente = clienteRepository.findById(id);

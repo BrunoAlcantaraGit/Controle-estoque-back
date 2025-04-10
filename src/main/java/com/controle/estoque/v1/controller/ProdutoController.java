@@ -20,7 +20,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("produtos")
+@RequestMapping("/produtos")
 @CrossOrigin
 @Data
 public class ProdutoController implements WebMvcConfigurer {
