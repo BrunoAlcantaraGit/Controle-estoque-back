@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
@@ -20,6 +21,7 @@ public class Produto {
     private BigDecimal valorDeCompra;
     private String marca;
     private String codigo;
+    private String imagem;
 
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -29,7 +31,13 @@ public class Produto {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private String dataCadastro;
 
+    public String getImagem() {
+        return imagem;
+    }
 
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
 
     public BigDecimal getValorDaUnidade() {
         return valorDaUnidade;

@@ -38,6 +38,7 @@ public class SecurityConfig {
                         .requestMatchers("/fornecedores/**").authenticated()
                         .requestMatchers("/clientes/**").authenticated()
                         .requestMatchers("/endereco/**").authenticated()
+                        .requestMatchers("/produtos/**").authenticated()
                         .requestMatchers("/h2-console/**").permitAll()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
