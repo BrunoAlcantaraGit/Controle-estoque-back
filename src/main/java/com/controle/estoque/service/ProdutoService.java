@@ -1,11 +1,14 @@
 package com.controle.estoque.service;
+
 import com.controle.estoque.configuration.ValidarCodigo;
 import com.controle.estoque.model.Produto;
 import com.controle.estoque.repository.ProdutoRepository;
+import com.controle.estoque.v1.dto.ProdutoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +24,8 @@ public class ProdutoService {
     ValidarCodigo validarCodigo;
 
     public Produto salvarProduto(Produto produto) throws Exception {
-        Optional<Produto>  VerificarProduto= produtoRepository.findBycodigo(produto.getCodigo());
-       //String validarCampoCodigoDoProduto = validarCodigo.validarNumero(produto.getCodigo());
+        Optional<Produto> VerificarProduto = produtoRepository.findBycodigo(produto.getCodigo());
+        //String validarCampoCodigoDoProduto = validarCodigo.validarNumero(produto.getCodigo());
 
         if (VerificarProduto.isEmpty()) {
             produto.setCodigo(validarCodigo.validarNumero(produto.getCodigo()));
@@ -32,12 +35,13 @@ public class ProdutoService {
         }
 
     }
+
     @Transactional
-    public Optional<Produto> listarPorId(Long id) throws Exception{
+    public Optional<Produto> listarPorId(Long id) throws Exception {
         Optional<Produto> produto = produtoRepository.findById(id);
-        if (produto.isPresent()){
+        if (produto.isPresent()) {
             return produto;
-        }else{
+        } else {
             throw new Exception("Porduto inexitente");
         }
     }
@@ -60,9 +64,10 @@ public class ProdutoService {
         }
 
     }
+
     @Transactional
     public void deletarID(Long id) throws Exception {
-    Optional<Produto>LocalizarProduto = produtoRepository.findById(id);
+        Optional<Produto> LocalizarProduto = produtoRepository.findById(id);
         if (LocalizarProduto.isPresent()) {
             produtoRepository.deleteById(id);
         } else {
@@ -71,45 +76,47 @@ public class ProdutoService {
 
     }
 
-    public List<Produto> listarTudo() throws Exception{
+    public List<ProdutoDTO> listarTudo() throws Exception {
         List<Produto> verificarLista = produtoRepository.findAll();
-        if (!verificarLista.isEmpty()){
-            List<Produto>produtos = new ArrayList<>();
-            for (Produto p: verificarLista){
-                produtos.add(p);
+
+        if (!verificarLista.isEmpty()) {
+            List<ProdutoDTO> produtoDTOS = new ArrayList<>();
+            for (Produto p : verificarLista) {
+                ProdutoDTO produtoDTO = new ProdutoDTO(p.getId(), p.getImagem(), p.getDescricao(), p.getQuantidade(), p.getValorDeCompra(), p.getValorDaUnidade());
+                produtoDTOS.add(produtoDTO);
             }
-            return produtos;
-        }else {
+            return produtoDTOS;
+        } else {
             throw new Exception("Lista não contem elementos ///");
         }
     }
 
-    public BigDecimal somarTotalProdutos() throws Exception{
+    public BigDecimal somarTotalProdutos() throws Exception {
         List<Produto> produtos = produtoRepository.findAll();
 
-        if(!produtos.isEmpty()){
+        if (!produtos.isEmpty()) {
 
-              BigDecimal totals = produtos.stream()
-                      .map(produto -> produto.getValorDeCompra())
-                      .filter(valorDeCompra -> valorDeCompra  != null)
-                      .reduce(BigDecimal.ZERO, BigDecimal::add);
+            BigDecimal totals = produtos.stream()
+                    .map(produto -> produto.getValorDeCompra())
+                    .filter(valorDeCompra -> valorDeCompra != null)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-          return  totals;
+            return totals;
 
-        }else{
+        } else {
             throw new Exception("Lista não contem elementos");
         }
 
     }
 
-    public BigDecimal valorTotalDoProduto(BigDecimal quantidade,BigDecimal valorDaUnidade) throws Exception{
-     BigDecimal total =  quantidade.multiply(valorDaUnidade);
-    if(quantidade != null && valorDaUnidade !=null){
-        return total;
+    public BigDecimal valorTotalDoProduto(BigDecimal quantidade, BigDecimal valorDaUnidade) throws Exception {
+        BigDecimal total = quantidade.multiply(valorDaUnidade);
+        if (quantidade != null && valorDaUnidade != null) {
+            return total;
 
-    }else{
-        throw new RuntimeException("nenhum paramentro informado");
-    }
+        } else {
+            throw new RuntimeException("nenhum paramentro informado");
+        }
 
     }
 

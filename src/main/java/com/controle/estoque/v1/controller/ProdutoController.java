@@ -2,6 +2,7 @@ package com.controle.estoque.v1.controller;
 
 import com.controle.estoque.model.Produto;
 import com.controle.estoque.service.ProdutoService;
+import com.controle.estoque.v1.dto.ProdutoDTO;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -23,7 +24,7 @@ import java.util.Optional;
 @RequestMapping("/produtos")
 @CrossOrigin
 @Data
-public class ProdutoController implements WebMvcConfigurer {
+public class ProdutoController  {
     @Autowired
     ProdutoService produtoService;
 
@@ -70,7 +71,7 @@ public class ProdutoController implements WebMvcConfigurer {
 
 
     @GetMapping("/listar-tudo")
-    public ResponseEntity<List<Produto>> listarTudo() throws Exception {// /
+    public ResponseEntity<List<ProdutoDTO>> listarTudo() throws Exception {// /
         try {
             return new ResponseEntity<>(produtoService.listarTudo(), HttpStatus.OK);
         } catch (Exception e) {

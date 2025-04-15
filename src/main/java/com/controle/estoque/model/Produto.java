@@ -21,6 +21,8 @@ public class Produto {
     private BigDecimal valorDeCompra;
     private String marca;
     private String codigo;
+    @Lob
+    @Column(length = 100000)
     private String imagem;
 
 

@@ -18,7 +18,7 @@ public class TokenService {
     private String secret;
 
     public Instant generateExpirationDate() {
-        return LocalDateTime.now().plusHours(2).atZone(ZoneId.of("America/Sao_Paulo")).toInstant();
+        return LocalDateTime.now().plusHours(8).atZone(ZoneId.of("America/Sao_Paulo")).toInstant();
     }
 
     public String generationToken(User user) {
