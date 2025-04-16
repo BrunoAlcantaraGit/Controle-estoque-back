@@ -39,26 +39,22 @@ public class ProdutoService {
     @Transactional
     public Optional<Produto> listarPorId(Long id) throws Exception {
         Optional<Produto> produto = produtoRepository.findById(id);
+
         if (produto.isPresent()) {
             return produto;
+
         } else {
             throw new Exception("Porduto inexitente");
         }
     }
 
+
     @Transactional
     public Produto EditarPorId(Long id, Produto produto) throws Exception {
         Optional<Produto> buscarProduto = produtoRepository.findBycodigo(produto.getCodigo());
         if (buscarProduto.isPresent()) {
-            Produto produtoAtualizado = buscarProduto.get();
-            produtoAtualizado.setCategoria(produto.getCategoria());
-            produtoAtualizado.setDescricao(produto.getDescricao());
-            produtoAtualizado.setValorDeCompra(produto.getValorDeCompra());
-            produtoAtualizado.setQuantidade(produto.getQuantidade());
-            produtoAtualizado.setValorDaUnidade(produto.getValorDaUnidade());
-            produtoAtualizado.setMarca(produto.getMarca());
-            produtoAtualizado.setCodigo(produto.getCodigo());
-            return produto;
+
+            return  produtoRepository.save(produto);
         } else {
             throw new Exception("Produto não cadastrado");
         }

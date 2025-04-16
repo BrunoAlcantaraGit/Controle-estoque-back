@@ -72,14 +72,15 @@ public class ProdutoController {
     ) throws Exception {
 
         Optional<Produto> produto = produtoService.listarPorId(id);
+
         Produto produtoAtualizado = produto.get();
+
         produtoAtualizado.setQuantidade(quantidade);
         produtoAtualizado.setValorDaUnidade(valorDaUnidade);
         produtoAtualizado.setValorDeCompra(valorDeCompra);
         produtoAtualizado.setMarca(marca);
         produtoAtualizado.setDescricao(descricao);
         produtoAtualizado.setCodigo(codigo);
-
 
         if (imagem != null && !imagem.isEmpty()) {
             try {
@@ -106,12 +107,11 @@ public class ProdutoController {
 
 
     @Transactional
-    @GetMapping("/listar/{id}")
+    @GetMapping("/buscar/{id}")
     public ResponseEntity<Optional<Produto>> listarPorId(@PathVariable Long id) throws Exception {
         try {
             return new ResponseEntity<>(produtoService.listarPorId(id), HttpStatus.OK);
         } catch (Exception e) {
-            //  e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
