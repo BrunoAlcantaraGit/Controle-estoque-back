@@ -24,7 +24,7 @@ import java.util.Optional;
 @RequestMapping("/produtos")
 @CrossOrigin
 @Data
-public class ProdutoController  {
+public class ProdutoController {
     @Autowired
     ProdutoService produtoService;
 
@@ -59,15 +59,38 @@ public class ProdutoController  {
         return new ResponseEntity<>(produtoService.salvarProduto(produto), HttpStatus.OK);
     }
 
-    /*@PostMapping("/salvar")
-    public ResponseEntity<Produto> salvarProduto(@RequestBody Produto produto) throws Exception {
-        try {
-            return new ResponseEntity<>(produtoService.salvarProduto(produto), HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+    @PutMapping(value = "/atualizar/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Produto> EditarPorId(@PathVariable Long id,
+                                               @RequestParam("descricao") String descricao,
+                                               @RequestParam("quantidade") Double quantidade,
+                                               @RequestParam("valorDeCompra") BigDecimal valorDeCompra,
+                                               @RequestParam("valorDaUnidade") BigDecimal valorDaUnidade,
+                                               @RequestParam("marca") String marca,
+                                               @RequestParam("codigo") String codigo,
+                                               @RequestParam(value = "imagem", required = false) MultipartFile imagem
+    ) throws Exception {
+
+        Optional<Produto> produto = produtoService.listarPorId(id);
+        Produto produtoAtualizado = produto.get();
+        produtoAtualizado.setQuantidade(quantidade);
+        produtoAtualizado.setValorDaUnidade(valorDaUnidade);
+        produtoAtualizado.setValorDeCompra(valorDeCompra);
+        produtoAtualizado.setMarca(marca);
+        produtoAtualizado.setDescricao(descricao);
+        produtoAtualizado.setCodigo(codigo);
+
+
+        if (imagem != null && !imagem.isEmpty()) {
+            try {
+                byte[] bytes = imagem.getBytes();
+                String base64 = Base64.getEncoder().encodeToString(bytes);
+                produtoAtualizado.setImagem(base64);
+            } catch (IOException e) {
+            }
         }
-    }*/
+        return new ResponseEntity<>(produtoService.salvarProduto(produtoAtualizado), HttpStatus.OK);
+    }
 
 
     @GetMapping("/listar-tudo")
@@ -93,17 +116,6 @@ public class ProdutoController  {
         }
     }
 
-
-    @PutMapping("/atualizar/{id}")
-    public ResponseEntity<Produto> EditarPorId(@PathVariable Long id, @RequestBody Produto produto) throws Exception {
-        try {
-            return new ResponseEntity<>(produtoService.EditarPorId(id, produto), HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
 
     @Transactional
     @DeleteMapping("/deletar/{id}")
