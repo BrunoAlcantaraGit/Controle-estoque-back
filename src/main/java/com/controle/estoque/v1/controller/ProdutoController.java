@@ -61,7 +61,7 @@ public class ProdutoController {
 
 
     @PutMapping(value = "/atualizar/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Produto> EditarPorId(@PathVariable Long id,
+    public ResponseEntity<Produto> editarPorId(@PathVariable Long id,
                                                @RequestParam("descricao") String descricao,
                                                @RequestParam("quantidade") Double quantidade,
                                                @RequestParam("valorDeCompra") BigDecimal valorDeCompra,
@@ -90,7 +90,7 @@ public class ProdutoController {
             } catch (IOException e) {
             }
         }
-        return new ResponseEntity<>(produtoService.salvarProduto(produtoAtualizado), HttpStatus.OK);
+        return new ResponseEntity<>(produtoService.editarPorId(id,produtoAtualizado), HttpStatus.OK);
     }
 
 

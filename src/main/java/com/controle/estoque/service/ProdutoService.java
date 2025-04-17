@@ -50,8 +50,8 @@ public class ProdutoService {
 
 
     @Transactional
-    public Produto EditarPorId(Long id, Produto produto) throws Exception {
-        Optional<Produto> buscarProduto = produtoRepository.findBycodigo(produto.getCodigo());
+    public Produto editarPorId(Long id, Produto produto) throws Exception {
+        Optional<Produto> buscarProduto = produtoRepository.findById(id);
         if (buscarProduto.isPresent()) {
 
             return  produtoRepository.save(produto);
