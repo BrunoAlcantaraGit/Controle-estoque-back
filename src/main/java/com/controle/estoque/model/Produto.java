@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Entity
@@ -21,41 +22,14 @@ public class Produto {
     private BigDecimal valorDeCompra;
     private String marca;
     private String codigo;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private String data;
+    @ManyToMany
+    private List<Venda> vendas;
+
     @Lob
     @Column(length = 100000)
     private String imagem;
-
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private TotalDaCompra total;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Categoria categoria;
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private String dataCadastro;
-
-    public String getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(String imagem) {
-        this.imagem = imagem;
-    }
-
-    public BigDecimal getValorDaUnidade() {
-        return valorDaUnidade;
-    }
-
-    public void setValorDaUnidade(BigDecimal valorDaUnidade) {
-        this.valorDaUnidade = valorDaUnidade;
-    }
-
-    public Double getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(Double quantidade) {
-        this.quantidade = quantidade;
-    }
 
     public Long getId() {
         return id;
@@ -73,20 +47,28 @@ public class Produto {
         this.descricao = descricao;
     }
 
+    public Double getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Double quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public BigDecimal getValorDaUnidade() {
+        return valorDaUnidade;
+    }
+
+    public void setValorDaUnidade(BigDecimal valorDaUnidade) {
+        this.valorDaUnidade = valorDaUnidade;
+    }
+
     public BigDecimal getValorDeCompra() {
         return valorDeCompra;
     }
 
     public void setValorDeCompra(BigDecimal valorDeCompra) {
         this.valorDeCompra = valorDeCompra;
-    }
-
-    public TotalDaCompra getTotal() {
-        return total;
-    }
-
-    public void setTotal(TotalDaCompra total) {
-        this.total = total;
     }
 
     public String getMarca() {
@@ -105,22 +87,20 @@ public class Produto {
         this.codigo = codigo;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public String getData() {
+        return data;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public String getDataCadastro() {
-        return dataCadastro;
+    public String getImagem() {
+        return imagem;
     }
 
-    public void setDataCadastro(String dataCadastro) {
-        this.dataCadastro = dataCadastro;
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
-
-
 }
 

@@ -15,6 +15,16 @@ public class User {
     String name;
     String email;
     String password;
+    //String role;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
     public String getId() {
         return id;
