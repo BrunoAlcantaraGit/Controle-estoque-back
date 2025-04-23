@@ -3,6 +3,7 @@ package com.controle.estoque.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.List;
 
@@ -16,6 +17,8 @@ public class Venda {
     private String codigo;
     private Double UnidadeDaVenda;
     private Double totalDaVenda;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private String data;
     @ManyToMany
     private List<Produto> produtos;
     @ManyToOne
@@ -28,6 +31,14 @@ public class Venda {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 
     public Long getId() {
