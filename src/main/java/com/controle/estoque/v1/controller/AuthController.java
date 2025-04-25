@@ -3,16 +3,17 @@ package com.controle.estoque.v1.controller;
 import com.controle.estoque.infraSecurity.TokenService;
 import com.controle.estoque.model.domain.User;
 import com.controle.estoque.repository.UserRepository;
+import com.controle.estoque.service.AuthService;
 import com.controle.estoque.v1.dto.LoginRequestDTO;
 import com.controle.estoque.v1.dto.RegisterDTO;
 import com.controle.estoque.v1.dto.ResponseDTO;
 
+import com.controle.estoque.v1.dto.UserDTO;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -24,12 +25,14 @@ public class AuthController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
+    private final AuthService authService;
 
 
-    public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder, TokenService tokenService) {
+    public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder, TokenService tokenService, AuthService authService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.tokenService = tokenService;
+        this.authService = authService;
     }
 
     @PostMapping("/login")
@@ -59,5 +62,16 @@ public class AuthController {
 
         return ResponseEntity.badRequest().build();
     }
+
+@GetMapping("/listar/{email}")
+
+    public ResponseEntity<Optional<User>> findUser(@PathVariable String email)throws Exception {
+        try {
+          return new  ResponseEntity<>(authService.findUser(email), HttpStatus.OK);
+        }catch (Exception e){
+
+          return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+}
 
 }
