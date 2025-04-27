@@ -14,7 +14,8 @@ public class Venda {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String codigo;
+    private int   quantidade;
+    private Double unidadeDacompra;
     private Double UnidadeDaVenda;
     private Double totalDaVenda;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
@@ -24,29 +25,28 @@ public class Venda {
     @ManyToOne
     private Cliente cliente;
 
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public Double getUnidadeDacompra() {
+        return unidadeDacompra;
+    }
+
+    public void setUnidadeDacompra(Double unidadeDacompra) {
+        this.unidadeDacompra = unidadeDacompra;
     }
 
     public Double getUnidadeDaVenda() {
@@ -63,6 +63,14 @@ public class Venda {
 
     public void setTotalDaVenda(Double totalDaVenda) {
         this.totalDaVenda = totalDaVenda;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 
     public List<Produto> getProdutos() {
