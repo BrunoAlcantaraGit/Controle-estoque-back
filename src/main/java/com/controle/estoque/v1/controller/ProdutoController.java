@@ -43,8 +43,8 @@ public class ProdutoController {
         Produto produto = new Produto();
         produto.setDescricao(descricao);
         produto.setQuantidade(quantidade);
-        produto.setCompra(venda);
-        produto.setVenda(compra);
+        produto.setCompra(compra);
+        produto.setVenda(venda);
         produto.setMarca(marca);
         produto.setCodigo(codigo);
 
@@ -76,8 +76,8 @@ public class ProdutoController {
         Produto produtoAtualizado = produto.get();
 
         produtoAtualizado.setQuantidade(quantidade);
-        produtoAtualizado.setVenda(compra);
-        produtoAtualizado.setCompra(venda);
+        produtoAtualizado.setVenda(venda);
+        produtoAtualizado.setCompra(compra);
         produtoAtualizado.setMarca(marca);
         produtoAtualizado.setDescricao(descricao);
         produtoAtualizado.setCodigo(codigo);

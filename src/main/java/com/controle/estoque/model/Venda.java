@@ -1,23 +1,20 @@
 package com.controle.estoque.model;
-
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Data
 @NoArgsConstructor
 public class Venda {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int   quantidade;
-    private Double venda;
-    private Double compra;
-    private Double totalDaVenda;
+    private BigDecimal venda;
+    private BigDecimal compra;
+    private BigDecimal totalDaVenda;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private String data;
     @ManyToMany
@@ -41,27 +38,27 @@ public class Venda {
         this.quantidade = quantidade;
     }
 
-    public Double getVenda() {
+    public BigDecimal getVenda() {
         return venda;
     }
 
-    public void setVenda(Double venda) {
+    public void setVenda(BigDecimal venda) {
         this.venda = venda;
     }
 
-    public Double getCompra() {
+    public BigDecimal getCompra() {
         return compra;
     }
 
-    public void setCompra(Double compra) {
+    public void setCompra(BigDecimal compra) {
         this.compra = compra;
     }
 
-    public Double getTotalDaVenda() {
+    public BigDecimal getTotalDaVenda() {
         return totalDaVenda;
     }
 
-    public void setTotalDaVenda(Double totalDaVenda) {
+    public void setTotalDaVenda(BigDecimal totalDaVenda) {
         this.totalDaVenda = totalDaVenda;
     }
 
