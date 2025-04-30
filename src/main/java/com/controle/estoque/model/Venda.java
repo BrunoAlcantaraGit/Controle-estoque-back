@@ -15,8 +15,8 @@ public class Venda {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int   quantidade;
-    private Double unidadeDacompra;
-    private Double UnidadeDaVenda;
+    private Double venda;
+    private Double compra;
     private Double totalDaVenda;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private String data;
@@ -41,20 +41,20 @@ public class Venda {
         this.quantidade = quantidade;
     }
 
-    public Double getUnidadeDacompra() {
-        return unidadeDacompra;
+    public Double getVenda() {
+        return venda;
     }
 
-    public void setUnidadeDacompra(Double unidadeDacompra) {
-        this.unidadeDacompra = unidadeDacompra;
+    public void setVenda(Double venda) {
+        this.venda = venda;
     }
 
-    public Double getUnidadeDaVenda() {
-        return UnidadeDaVenda;
+    public Double getCompra() {
+        return compra;
     }
 
-    public void setUnidadeDaVenda(Double unidadeDaVenda) {
-        UnidadeDaVenda = unidadeDaVenda;
+    public void setCompra(Double compra) {
+        this.compra = compra;
     }
 
     public Double getTotalDaVenda() {

@@ -78,7 +78,7 @@ public class ProdutoService {
         if (!verificarLista.isEmpty()) {
             List<ProdutoDTO> produtoDTOS = new ArrayList<>();
             for (Produto p : verificarLista) {
-                ProdutoDTO produtoDTO = new ProdutoDTO(p.getId(), p.getImagem(), p.getDescricao(), p.getQuantidade(), p.getValorDeCompra(), p.getValorDaUnidade());
+                ProdutoDTO produtoDTO = new ProdutoDTO(p.getId(), p.getImagem(), p.getDescricao(), p.getQuantidade(), p.getCompra(), p.getVenda());
                 produtoDTOS.add(produtoDTO);
             }
             return produtoDTOS;
@@ -93,8 +93,8 @@ public class ProdutoService {
         if (!produtos.isEmpty()) {
 
             BigDecimal totals = produtos.stream()
-                    .map(produto -> produto.getValorDeCompra())
-                    .filter(valorDeCompra -> valorDeCompra != null)
+                    .map(produto -> produto.getCompra())
+                    .filter(compra -> compra != null)
                     .reduce(BigDecimal.ZERO, BigDecimal::add);
 
             return totals;

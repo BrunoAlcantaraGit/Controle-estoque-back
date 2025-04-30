@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,8 +17,8 @@ public class Produto {
     private Long id;
     private String descricao;
     private Double quantidade;
-    private BigDecimal valorDaUnidade;
-    private BigDecimal valorDeCompra;
+    private BigDecimal venda;
+    private BigDecimal compra;
     private String marca;
     private String codigo;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
@@ -55,20 +54,20 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    public BigDecimal getValorDaUnidade() {
-        return valorDaUnidade;
+    public BigDecimal getVenda() {
+        return venda;
     }
 
-    public void setValorDaUnidade(BigDecimal valorDaUnidade) {
-        this.valorDaUnidade = valorDaUnidade;
+    public void setVenda(BigDecimal venda) {
+        this.venda = venda;
     }
 
-    public BigDecimal getValorDeCompra() {
-        return valorDeCompra;
+    public BigDecimal getCompra() {
+        return compra;
     }
 
-    public void setValorDeCompra(BigDecimal valorDeCompra) {
-        this.valorDeCompra = valorDeCompra;
+    public void setCompra(BigDecimal compra) {
+        this.compra = compra;
     }
 
     public String getMarca() {

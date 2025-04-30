@@ -33,8 +33,8 @@ public class ProdutoController {
     public ResponseEntity<Produto> salvarProduto(
             @RequestParam("descricao") String descricao,
             @RequestParam("quantidade") Double quantidade,
-            @RequestParam("valorDeCompra") BigDecimal valorDeCompra,
-            @RequestParam("valorDaUnidade") BigDecimal valorDaUnidade,
+            @RequestParam("venda") BigDecimal venda,
+            @RequestParam("compra") BigDecimal compra,
             @RequestParam("marca") String marca,
             @RequestParam("codigo") String codigo,
             @RequestParam(value = "imagem", required = false) MultipartFile imagem
@@ -43,8 +43,8 @@ public class ProdutoController {
         Produto produto = new Produto();
         produto.setDescricao(descricao);
         produto.setQuantidade(quantidade);
-        produto.setValorDeCompra(valorDeCompra);
-        produto.setValorDaUnidade(valorDaUnidade);
+        produto.setCompra(venda);
+        produto.setVenda(compra);
         produto.setMarca(marca);
         produto.setCodigo(codigo);
 
@@ -64,8 +64,8 @@ public class ProdutoController {
     public ResponseEntity<Produto> editarPorId(@PathVariable Long id,
                                                @RequestParam("descricao") String descricao,
                                                @RequestParam("quantidade") Double quantidade,
-                                               @RequestParam("valorDeCompra") BigDecimal valorDeCompra,
-                                               @RequestParam("valorDaUnidade") BigDecimal valorDaUnidade,
+                                               @RequestParam("venda") BigDecimal venda,
+                                               @RequestParam("compra") BigDecimal compra,
                                                @RequestParam("marca") String marca,
                                                @RequestParam("codigo") String codigo,
                                                @RequestParam(value = "imagem", required = false) MultipartFile imagem
@@ -76,8 +76,8 @@ public class ProdutoController {
         Produto produtoAtualizado = produto.get();
 
         produtoAtualizado.setQuantidade(quantidade);
-        produtoAtualizado.setValorDaUnidade(valorDaUnidade);
-        produtoAtualizado.setValorDeCompra(valorDeCompra);
+        produtoAtualizado.setVenda(compra);
+        produtoAtualizado.setCompra(venda);
         produtoAtualizado.setMarca(marca);
         produtoAtualizado.setDescricao(descricao);
         produtoAtualizado.setCodigo(codigo);
