@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.Optional;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,11 +17,11 @@ public class Saida {
     private int quantidade;
     private BigDecimal compra;
     private BigDecimal venda;
-    private BigDecimal totalVendido;
-    private BigDecimal LucroDaTransacao;
+    private BigDecimal totalDaVenda;
+    private BigDecimal lucroTransacao;
     @ManyToOne
     private Cliente cliente;
-   @ManyToOne
+    @ManyToOne
     private Produto  produto;
 
     public Long getId() {
@@ -56,20 +56,20 @@ public class Saida {
         this.venda = venda;
     }
 
-    public BigDecimal getTotalVendido() {
-        return totalVendido;
+    public BigDecimal getTotalDaVenda() {
+        return totalDaVenda;
     }
 
-    public void setTotalVendido(BigDecimal totalVendido) {
-        this.totalVendido = totalVendido;
+    public void setTotalDaVenda(BigDecimal totalDaVenda) {
+        this.totalDaVenda = totalDaVenda;
     }
 
-    public BigDecimal getLucroDaTransacao() {
-        return LucroDaTransacao;
+    public BigDecimal getLucroTransacao() {
+        return lucroTransacao;
     }
 
-    public void setLucroDaTransacao(BigDecimal lucroDaTransacao) {
-        LucroDaTransacao = lucroDaTransacao;
+    public void setLucroTransacao(BigDecimal lucroTransacao) {
+        this.lucroTransacao = lucroTransacao;
     }
 
     public Cliente getCliente() {

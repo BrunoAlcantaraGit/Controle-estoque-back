@@ -23,8 +23,8 @@ public class Produto {
     private String codigo;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private String data;
-    @ManyToMany
-    private List<Venda> vendas;
+    @OneToMany
+    private List<Saida> saidas;
 
     @Lob
     @Column(length = 100000)
@@ -92,6 +92,14 @@ public class Produto {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public List<Saida> getSaidas() {
+        return saidas;
+    }
+
+    public void setSaidas(List<Saida> saidas) {
+        this.saidas = saidas;
     }
 
     public String getImagem() {

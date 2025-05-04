@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 @RestController
 @AllArgsConstructor
 @Data
@@ -40,14 +38,13 @@ public class SaidaController {
 
           Saida newSaida = new Saida();
 
-            newSaida.setTotalVendido(dto.totalDaVenda());
+            newSaida.setTotalDaVenda(dto.totalDaVenda());
             newSaida.setProduto(produto);
             newSaida.setCliente(cliente);
             newSaida.setQuantidade(dto.quantidade());
             newSaida.setCompra(dto.compra());
             newSaida.setVenda(dto.venda());
-            newSaida.setLucroDaTransacao(dto.lucroTransacao());
-
+            newSaida.setLucroTransacao(dto.lucroTransacao());
 
             return new ResponseEntity<>(saidaService.registrarSaida(newSaida), HttpStatus.CREATED);
         }catch (Exception e){

@@ -16,7 +16,7 @@ public class Cliente {
     private String documento;
 
     @OneToMany
-    private List<Venda> vendas;
+    private List<Saida> saidas;
     @OneToOne(cascade = CascadeType.PERSIST)
     private Contato contato;
     @OneToOne(cascade = CascadeType.PERSIST)
@@ -46,12 +46,12 @@ public class Cliente {
         this.documento = documento;
     }
 
-    public List<Venda> getVendas() {
-        return vendas;
+    public List<Saida> getSaidas() {
+        return saidas;
     }
 
-    public void setVendas(List<Venda> vendas) {
-        this.vendas = vendas;
+    public void setSaidas(List<Saida> saidas) {
+        this.saidas = saidas;
     }
 
     public Contato getContato() {

@@ -15,6 +15,7 @@ public class SaidaService {
     SaidaRepository saidaRepository;
 
     public Saida registrarSaida(Saida saida)throws Exception{
+
         return saidaRepository.save(saida);
     }
 }
