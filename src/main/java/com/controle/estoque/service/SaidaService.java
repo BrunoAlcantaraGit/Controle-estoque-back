@@ -2,6 +2,7 @@ package com.controle.estoque.service;
 
 import com.controle.estoque.model.Saida;
 import com.controle.estoque.repository.SaidaRepository;
+import com.controle.estoque.v1.dto.ListarSaidaDTO;
 import com.controle.estoque.v1.dto.SaidaDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,14 +23,16 @@ public class SaidaService {
         return saidaRepository.save(saida);
     }
 
-    public List<SaidaDTO> listarSaida() throws Exception{
+    public List<ListarSaidaDTO> listar() throws Exception{
         List<Saida> saidas = saidaRepository.findAll();
         if(!saidas.isEmpty()){
-            List<SaidaDTO>saidasDTO = new ArrayList<>();
+            List<ListarSaidaDTO>saidasDTO = new ArrayList<>();
             for (Saida s:saidas){
 
-                SaidaDTO saidaDTO = new SaidaDTO(s.getId(),s.getQuantidade(),s.getLucroTransacao(),s.getCliente().getId(),
-                        s.getProduto().getId(),s.getVenda(),s.getCompra(),s.getTotalDaVenda());
+                ListarSaidaDTO saidaDTO = new ListarSaidaDTO(s.getId(),s.getQuantidade(),
+                        s.getTotalDaVenda(),s.getCliente().getNome(),s.getProduto().getDescricao());
+
+                saidasDTO.add(saidaDTO);
             }
             return saidasDTO;
         }else {

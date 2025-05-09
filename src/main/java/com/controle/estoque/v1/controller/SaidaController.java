@@ -7,6 +7,7 @@ import com.controle.estoque.repository.ClienteRepository;
 import com.controle.estoque.repository.ProdutoRepository;
 import com.controle.estoque.repository.SaidaRepository;
 import com.controle.estoque.service.SaidaService;
+import com.controle.estoque.v1.dto.ListarSaidaDTO;
 import com.controle.estoque.v1.dto.SaidaDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -56,9 +57,9 @@ public class SaidaController {
     }
 
     @GetMapping("listar")
-    public ResponseEntity<List<SaidaDTO>>listar()throws Exception{
+    public ResponseEntity<List<ListarSaidaDTO>>listar()throws Exception{
         try {
-            return new ResponseEntity<>(saidaService.listarSaida(),HttpStatus.OK);
+            return new ResponseEntity<>(saidaService.listar(),HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
