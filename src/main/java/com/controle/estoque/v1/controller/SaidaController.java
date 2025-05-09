@@ -5,6 +5,7 @@ import com.controle.estoque.model.Produto;
 import com.controle.estoque.model.Saida;
 import com.controle.estoque.repository.ClienteRepository;
 import com.controle.estoque.repository.ProdutoRepository;
+import com.controle.estoque.repository.SaidaRepository;
 import com.controle.estoque.service.SaidaService;
 import com.controle.estoque.v1.dto.SaidaDTO;
 import lombok.AllArgsConstructor;
@@ -12,10 +13,9 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -26,9 +26,12 @@ public class SaidaController {
     @Autowired
     SaidaService saidaService;
     @Autowired
+    SaidaRepository saidaRepository;
+    @Autowired
     ClienteRepository clienteRepository;
     @Autowired
     ProdutoRepository produtoRepository;
+
 
     @PostMapping("/salvar")
     public ResponseEntity<Saida> registrarSaida(@RequestBody SaidaDTO dto)throws Exception{
@@ -49,6 +52,15 @@ public class SaidaController {
             return new ResponseEntity<>(saidaService.registrarSaida(newSaida), HttpStatus.CREATED);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+    }
+
+    @GetMapping("listar")
+    public ResponseEntity<List<SaidaDTO>>listar()throws Exception{
+        try {
+            return new ResponseEntity<>(saidaService.listarSaida(),HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
