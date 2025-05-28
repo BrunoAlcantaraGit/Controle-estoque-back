@@ -19,10 +19,21 @@ public class Saida {
     private BigDecimal venda;
     private BigDecimal totalDaVenda;
     private BigDecimal lucroTransacao;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Venda Entityvenda;
     @ManyToOne
     private Cliente cliente;
     @ManyToOne
     private Produto  produto;
+
+
+    public Venda getEntityvenda() {
+        return Entityvenda;
+    }
+
+    public void setEntityvenda(Venda entityvenda) {
+        Entityvenda = entityvenda;
+    }
 
     public Long getId() {
         return id;

@@ -41,7 +41,8 @@ public class SecurityConfig {
                         .requestMatchers("/endereco/**").authenticated()
                         .requestMatchers("/produtos/**").authenticated()
                         .requestMatchers("/saidas/**").permitAll()
-                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/vendas/**").permitAll()
+
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
                 return httpSecurity.build();
