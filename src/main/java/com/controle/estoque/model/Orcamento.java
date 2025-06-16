@@ -5,12 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
-public class Saida {
+public class Orcamento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO )
     private Long id;

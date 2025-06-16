@@ -78,7 +78,7 @@ public class ProdutoService {
         if (!verificarLista.isEmpty()) {
             List<ProdutoDTO> produtoDTOS = new ArrayList<>();
             for (Produto p : verificarLista) {
-                ProdutoDTO produtoDTO = new ProdutoDTO(p.getId(), p.getImagem(), p.getDescricao(), p.getQuantidade(), p.getCompra(), p.getVenda());
+                ProdutoDTO produtoDTO = new ProdutoDTO(p.getId(), p.getImagem(), p.getDescricao(), p.getQuantidade(), p.getVenda(), p.getCompra());
                 produtoDTOS.add(produtoDTO);
             }
             return produtoDTOS;

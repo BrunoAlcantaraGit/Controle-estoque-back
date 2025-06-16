@@ -24,7 +24,7 @@ public class Produto {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private String data;
     @OneToMany
-    private List<Saida> saidas;
+    private List<Orcamento> orcamentos;
 
     @Lob
     @Column(length = 100000)
@@ -94,12 +94,12 @@ public class Produto {
         this.data = data;
     }
 
-    public List<Saida> getSaidas() {
-        return saidas;
+    public List<Orcamento> getSaidas() {
+        return orcamentos;
     }
 
-    public void setSaidas(List<Saida> saidas) {
-        this.saidas = saidas;
+    public void setSaidas(List<Orcamento> orcamentos) {
+        this.orcamentos = orcamentos;
     }
 
     public String getImagem() {

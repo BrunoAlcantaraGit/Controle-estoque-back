@@ -1,7 +1,7 @@
 package com.controle.estoque.model;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class Venda {
     private int quantidade;
 
     @OneToMany
-    private List<Saida>saidas;
+    private List<Orcamento> orcamentos;
 
     public Long getId() {
         return id;
@@ -26,12 +26,12 @@ public class Venda {
         this.id = id;
     }
 
-    public List<Saida> getSaidas() {
-        return saidas;
+    public List<Orcamento> getSaidas() {
+        return orcamentos;
     }
 
-    public void setSaidas(List<Saida> saidas) {
-        this.saidas = saidas;
+    public void setSaidas(List<Orcamento> orcamentos) {
+        this.orcamentos = orcamentos;
     }
 
     public BigDecimal getTotal() {
