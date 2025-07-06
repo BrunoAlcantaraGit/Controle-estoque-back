@@ -11,6 +11,8 @@ public class Categoria{
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+   private String teste;
+   
     private String tipo;
 
     public String getTipo() {
@@ -28,4 +30,6 @@ public class Categoria{
     public void setId(Long id) {
         this.id = id;
     }
+
+    
 }
