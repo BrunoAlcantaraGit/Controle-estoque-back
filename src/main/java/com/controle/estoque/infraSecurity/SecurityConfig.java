@@ -41,7 +41,16 @@ public class SecurityConfig {
                         .requestMatchers("/endereco/**").permitAll()
                         .requestMatchers("/produtos/**").permitAll()
                         .requestMatchers("/orcamento/**").permitAll()
-                        .requestMatchers("/vendas/**").permitAll()
+                        .requestMatchers("/venda/**").permitAll()
+
+                        .requestMatchers(
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/swagger-resources/**",
+                                "/webjars/**"
+                        ).permitAll()
+
 
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);

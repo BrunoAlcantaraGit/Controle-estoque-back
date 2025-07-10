@@ -1,22 +1,39 @@
 package com.controle.estoque.model;
-import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
+import java.util.Optional;
 
 @Entity
-@NoArgsConstructor
+@Data
+@Getter
+@Setter
 public class Venda {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private BigDecimal total;
-    private BigDecimal lucro;
+    private  Long id;
+    private double lucro;
+    private double valorTotalDaVenda;
     private int quantidade;
-
     @OneToMany
-    private List<Orcamento> orcamentos;
+    List<Produto> produtos;
+    @OneToMany
+    List<Orcamento> orcamentos;
+    @ManyToOne
+    Cliente cliente;
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
 
     public Long getId() {
         return id;
@@ -26,35 +43,43 @@ public class Venda {
         this.id = id;
     }
 
-    public List<Orcamento> getSaidas() {
-        return orcamentos;
-    }
-
-    public void setSaidas(List<Orcamento> orcamentos) {
-        this.orcamentos = orcamentos;
-    }
-
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
-
-    public BigDecimal getLucro() {
+    public double getLucro() {
         return lucro;
     }
 
-    public void setLucro(BigDecimal lucro) {
+    public void setLucro(double lucro) {
         this.lucro = lucro;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+    public double getValorTotalDaVenda() {
+        return valorTotalDaVenda;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setValorTotalDaVenda(double valorTotalDaVenda) {
+        this.valorTotalDaVenda = valorTotalDaVenda;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
+
+    public List<Orcamento> getOrcamentos() {
+        return orcamentos;
+    }
+
+    public void setOrcamentos(List<Orcamento> orcamentos) {
+        this.orcamentos = orcamentos;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

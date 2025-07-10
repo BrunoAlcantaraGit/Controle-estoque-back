@@ -18,20 +18,20 @@ public class Orcamento {
     private BigDecimal venda;
     private BigDecimal totalDaVenda;
     private BigDecimal lucroTransacao;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Venda Entityvenda;
+
     @ManyToOne
     private Cliente cliente;
     @ManyToOne
     private Produto  produto;
+    @ManyToOne
+    private Venda entityVenda;
 
-
-    public Venda getEntityvenda() {
-        return Entityvenda;
+    public Venda getEntityVenda() {
+        return entityVenda;
     }
 
-    public void setEntityvenda(Venda entityvenda) {
-        Entityvenda = entityvenda;
+    public void setEntityVenda(Venda entityVenda) {
+        this.entityVenda = entityVenda;
     }
 
     public Long getId() {
