@@ -19,7 +19,6 @@ public class Venda {
     private  Long id;
     private double lucro;
     private double valorTotalDaVenda;
-    private int quantidade;
     @OneToMany
     List<Produto> produtos;
     @OneToMany
@@ -27,13 +26,6 @@ public class Venda {
     @ManyToOne
     Cliente cliente;
 
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
 
     public Long getId() {
         return id;

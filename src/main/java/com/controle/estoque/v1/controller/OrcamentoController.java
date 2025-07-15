@@ -25,7 +25,6 @@ import java.util.List;
 public class OrcamentoController {
 
 
-
     @Autowired
     OrcamentoService orcamentoService;
     @Autowired
@@ -35,12 +34,12 @@ public class OrcamentoController {
 
 
     @PostMapping("/salvar")
-    public ResponseEntity<Orcamento> registrarSaida(@RequestBody OrcamentoDTO dto)throws Exception{
+    public ResponseEntity<Orcamento> registrarSaida(@RequestBody OrcamentoDTO dto) throws Exception {
         try {
-          Cliente cliente = clienteRepository.findById(Long.valueOf(dto.cliente())).orElseThrow(()-> new RuntimeException("Cliente não encontrato"));
-          Produto produto = produtoRepository.findById(Long.valueOf(dto.produto())).orElseThrow(()-> new RuntimeException("Produto não encontrado "));
+            Cliente cliente = clienteRepository.findById(Long.valueOf(dto.cliente())).orElseThrow(() -> new RuntimeException("Cliente não encontrato"));
+            Produto produto = produtoRepository.findById(Long.valueOf(dto.produto())).orElseThrow(() -> new RuntimeException("Produto não encontrado "));
 
-          Orcamento newOrcamento = new Orcamento();
+            Orcamento newOrcamento = new Orcamento();
 
             newOrcamento.setTotalDaVenda(dto.totalDaVenda());
             newOrcamento.setProduto(produto);
@@ -52,17 +51,28 @@ public class OrcamentoController {
 
             return new ResponseEntity<>(orcamentoService.salvar(newOrcamento), HttpStatus.CREATED);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 
     @GetMapping("listar")
-    public ResponseEntity<List<ResponseOrcamentoDTO>>listar()throws Exception{
+    public ResponseEntity<List<ResponseOrcamentoDTO>> listar() throws Exception {
         try {
-            return new ResponseEntity<>(orcamentoService.listar(),HttpStatus.OK);
-        }catch (Exception e){
+            return new ResponseEntity<>(orcamentoService.listar(), HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @DeleteMapping("deletar/{id}")
+    public ResponseEntity deletar(@PathVariable Long id) throws Exception {
+        try {
+            orcamentoService.deletar(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

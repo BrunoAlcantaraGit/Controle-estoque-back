@@ -39,7 +39,7 @@ public class VendaController {
         try {
             Cliente cliente = clienteRepository.findById(body.clienteID()).orElseThrow(() -> new RuntimeException("Cliente não existe"));
             List<Produto> produtos = produtoRepository.findAllById(body.produtoIds());
-            List<Orcamento> orcamentos = orcamentoRepository.findAllById(body.OrcamentoIds());
+            List<Orcamento> orcamentos = orcamentoRepository.findAllById(body.orcamentoIds());
             Venda venda = new Venda();
             if (cliente != null && !orcamentos.isEmpty() && !produtos.isEmpty()) {
 
@@ -47,7 +47,6 @@ public class VendaController {
                 venda.setProdutos(produtos);
                 venda.setOrcamentos(orcamentos);
                 venda.setLucro(body.lucro());
-                venda.setQuantidade(body.quantidade());
                 venda.setValorTotalDaVenda(body.valorTotalDaVenda());
             }
             return new ResponseEntity<>(vendaService.salvar(venda), HttpStatus.OK);
