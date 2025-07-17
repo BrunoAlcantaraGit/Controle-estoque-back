@@ -121,11 +121,14 @@ public class ProdutoController {
     @DeleteMapping("/deletar/{id}")
     public ResponseEntity deletarId(@PathVariable Long id) throws Exception {
         try {
+            if(id==null){
+             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
             produtoService.deletarID(id);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             //  e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 
     }
