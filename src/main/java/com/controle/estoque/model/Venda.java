@@ -26,6 +26,13 @@ public class Venda {
     @ManyToOne
     Cliente cliente;
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
     public Long getId() {
         return id;
@@ -67,11 +74,5 @@ public class Venda {
         this.orcamentos = orcamentos;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
 }

@@ -41,7 +41,7 @@ public class SecurityConfig {
                         .requestMatchers("/endereco/**").authenticated()
                         .requestMatchers("/produtos/**").authenticated()
                         .requestMatchers("/orcamento/**").authenticated()
-                        .requestMatchers("/venda/**").authenticated()
+                        .requestMatchers("/venda/**").permitAll()
 
                         .requestMatchers(
                                 "/v3/api-docs/**",

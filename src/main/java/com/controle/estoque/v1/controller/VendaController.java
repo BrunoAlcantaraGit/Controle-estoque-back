@@ -10,16 +10,16 @@ import com.controle.estoque.repository.ProdutoRepository;
 import com.controle.estoque.repository.VendaRepository;
 import com.controle.estoque.service.VendaService;
 import com.controle.estoque.v1.dto.VendaDTO;
+import com.controle.estoque.v1.dto.VendaResponseDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -35,9 +35,9 @@ public class VendaController {
     private OrcamentoRepository orcamentoRepository;
 
     @PostMapping("/salvar")
-    private ResponseEntity<Venda> salvar(@RequestBody VendaDTO body) throws Exception {
+    public ResponseEntity<Venda> salvar(@RequestBody VendaDTO body) throws Exception {
         try {
-            Cliente cliente = clienteRepository.findById(body.clienteID()).orElseThrow(() -> new RuntimeException("Cliente não existe"));
+            Cliente cliente = clienteRepository.findById(body.clienteId()).orElseThrow(() -> new RuntimeException("Cliente não existe"));
             List<Produto> produtos = produtoRepository.findAllById(body.produtoIds());
             List<Orcamento> orcamentos = orcamentoRepository.findAllById(body.orcamentoIds());
             Venda venda = new Venda();
@@ -55,4 +55,13 @@ public class VendaController {
 
         }
     }
+@GetMapping("/listar")
+    public ResponseEntity<List<VendaResponseDTO>> listar()throws Exception{
+        try {
+            return new ResponseEntity<>(vendaService.listar(),HttpStatus.OK);
+
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+}
 }

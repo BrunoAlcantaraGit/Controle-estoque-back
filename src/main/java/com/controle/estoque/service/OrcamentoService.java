@@ -38,8 +38,10 @@ public class OrcamentoService {
                                 s.getTotalDaVenda(),
                                 s.getLucroTransacao(),
                                 s.getCliente().getNome(),
-                                s.getProduto().getDescricao());
-
+                                s.getProduto().getDescricao(),
+                                s.getCliente().getId(),
+                                s.getProduto().getId()
+                        );
                 orcamentosDTO.add(ResponseOrcamentoDTO);
             }
             return orcamentosDTO;
