@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,6 +26,14 @@ public class Orcamento {
     private Produto  produto;
     @ManyToOne
     private Venda entityVenda;
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
 
     public Venda getEntityVenda() {
         return entityVenda;
@@ -90,11 +99,5 @@ public class Orcamento {
         this.cliente = cliente;
     }
 
-    public Produto getProduto() {
-        return produto;
-    }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
 }

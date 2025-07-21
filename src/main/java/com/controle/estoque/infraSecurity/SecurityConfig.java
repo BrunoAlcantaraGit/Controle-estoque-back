@@ -36,11 +36,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST,"/auth/register").permitAll()
                         .requestMatchers(HttpMethod.GET,"/auth/**").authenticated()
-                        .requestMatchers("/fornecedores/**").authenticated()
-                        .requestMatchers("/clientes/**").authenticated()
-                        .requestMatchers("/endereco/**").authenticated()
-                        .requestMatchers("/produtos/**").authenticated()
-                        .requestMatchers("/orcamento/**").authenticated()
+                        .requestMatchers("/fornecedores/**").permitAll()
+                        .requestMatchers("/clientes/**").permitAll()
+                        .requestMatchers("/endereco/**").permitAll()
+                        .requestMatchers("/produtos/**").permitAll()
+                        .requestMatchers("/orcamento/**").permitAll()
                         .requestMatchers("/venda/**").permitAll()
 
                         .requestMatchers(

@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -55,8 +56,9 @@ public class VendaController {
 
         }
     }
+@Transactional
 @GetMapping("/listar")
-    public ResponseEntity<List<VendaResponseDTO>> listar()throws Exception{
+    public ResponseEntity<List<VendaResponseDTO>>listar()throws Exception{
         try {
             return new ResponseEntity<>(vendaService.listar(),HttpStatus.OK);
 

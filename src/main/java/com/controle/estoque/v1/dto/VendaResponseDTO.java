@@ -4,6 +4,7 @@ import com.controle.estoque.model.Orcamento;
 import com.controle.estoque.model.Produto;
 
 import java.util.List;
+import java.util.stream.Stream;
 
-public record VendaResponseDTO(com.controle.estoque.model.Cliente cliente, List<Produto> produtoIds, List<Orcamento> orcamentoIds, double lucro, double valorTotalDaVenda) {
+public record VendaResponseDTO(String cliente, List<Long> produtoIds, List<Long> orcamentoIds, double lucro, double valorTotalDaVenda) {
 }
