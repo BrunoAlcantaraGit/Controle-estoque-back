@@ -57,8 +57,8 @@ public class ClienteService {
     @Transactional
     public Cliente editarCliente(Long id, Cliente clienteAtual) throws Exception {
         Optional<Cliente> cliente = clienteRepository.findById(id);
-        Optional<Endereco> endereco = enderecoRepository.findById(id);
-        Optional<Contato> contato = contatoRepository.findById(id);
+        Optional<Endereco> endereco = enderecoRepository.findById(cliente.get().getEndereco().getId());
+        Optional<Contato> contato = contatoRepository.findById(cliente.get().getContato().getId());
 
         if (cliente.isPresent()) {
             Cliente clienteatualizado = cliente.get();

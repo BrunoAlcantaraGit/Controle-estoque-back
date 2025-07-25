@@ -41,8 +41,8 @@ public class FornecedorService {
     @Transactional
     public Fornecedor ataulizarPorId(Fornecedor fornecedor, Long id) throws Exception {
         Optional<Fornecedor> verificarDocumento = fornecedorRepository.findById(id);
-        Optional<Endereco> buscarEndereco = enderecoRepository.findById(id);
-        Optional<Contato> bucarContato = contatoRepository.findById(id);
+        Optional<Endereco> buscarEndereco = enderecoRepository.findById(fornecedor.getEndereco().getId());
+        Optional<Contato> bucarContato = contatoRepository.findById(fornecedor.getContato().getId());
         if (verificarDocumento.isPresent()) {
 
             Fornecedor fornecedorAtualizado = verificarDocumento.get();

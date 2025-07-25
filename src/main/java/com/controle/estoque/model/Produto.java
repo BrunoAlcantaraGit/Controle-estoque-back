@@ -10,7 +10,6 @@ import java.util.List;
 
 @Data
 @Entity
-@NoArgsConstructor
 public class Produto {
 @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,6 +24,8 @@ public class Produto {
     private String data;
     @OneToMany
     private List<Orcamento> orcamentos;
+    @ManyToMany
+    private  List<Venda> vendas;
 
     @Lob
     @Column(length = 100000)

@@ -1,15 +1,10 @@
 package com.controle.estoque.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
-@Data
-@NoArgsConstructor
 public class Orcamento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO )
@@ -27,21 +22,6 @@ public class Orcamento {
     @ManyToOne
     private Venda entityVenda;
 
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public Venda getEntityVenda() {
-        return entityVenda;
-    }
-
-    public void setEntityVenda(Venda entityVenda) {
-        this.entityVenda = entityVenda;
-    }
 
     public Long getId() {
         return id;
@@ -99,5 +79,19 @@ public class Orcamento {
         this.cliente = cliente;
     }
 
+    public Produto getProduto() {
+        return produto;
+    }
 
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public Venda getEntityVenda() {
+        return entityVenda;
+    }
+
+    public void setEntityVenda(Venda entityVenda) {
+        this.entityVenda = entityVenda;
+    }
 }

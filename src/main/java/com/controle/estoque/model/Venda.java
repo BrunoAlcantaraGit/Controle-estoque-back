@@ -9,9 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Entity
-@Data
-@Getter
-@Setter
 public class Venda {
 
     @Id
@@ -19,9 +16,9 @@ public class Venda {
     private  Long id;
     private double lucro;
     private double valorTotalDaVenda;
-    @OneToMany
+    @ManyToMany
     List<Produto> produtos;
-    @OneToMany
+    @ManyToMany
     List<Orcamento> orcamentos;
     @ManyToOne
     Cliente cliente;
