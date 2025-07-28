@@ -8,6 +8,7 @@ import com.controle.estoque.repository.ClienteRepository;
 import com.controle.estoque.repository.OrcamentoRepository;
 import com.controle.estoque.repository.ProdutoRepository;
 import com.controle.estoque.repository.VendaRepository;
+import com.controle.estoque.v1.dto.VendaDTO;
 import com.controle.estoque.v1.dto.VendaResponseDTO;
 import feign.Client;
 import lombok.AllArgsConstructor;
@@ -15,9 +16,12 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -58,16 +62,20 @@ public class VendaService {
                         .map(Orcamento::getId)
                         .toList();
 
+
                 VendaResponseDTO vendaResponseDTO = new VendaResponseDTO(
                         v.getCliente().getNome(),
                         produtosIds,
                         orcamentoIds,
                         v.getLucro(),
                         v.getValorTotalDaVenda());
-
                 vendaDTOS.add(vendaResponseDTO);
+
+
             }
-            return vendaDTOS;
+            return vendaDTOS.stream()
+                    .sorted(Comparator.comparing(VendaResponseDTO::cliente))
+                    .collect(Collectors.toList());
         } else {
             throw new Exception("sale list is empty");
         }
