@@ -15,8 +15,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 @CrossOrigin
@@ -100,7 +103,9 @@ public class FornecedorService {
                 FornecedorDTO fornecedorDTO = new FornecedorDTO(f.getId(),f.getNome(),f.getDocumento(),f.getContato().getEmail(), f.getContato().getTelefone());
                 fornecedoresDTO.add(fornecedorDTO);
             }
-            return fornecedoresDTO;
+            return fornecedoresDTO.stream()
+                    .sorted(Comparator.comparing(FornecedorDTO::nome))
+                    .collect(Collectors.toList());
         } else {
             throw new Exception("Lista não contem elementos");
         }

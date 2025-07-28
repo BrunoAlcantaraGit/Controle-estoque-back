@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -44,7 +46,10 @@ public class OrcamentoService {
                         );
                 orcamentosDTO.add(ResponseOrcamentoDTO);
             }
-            return orcamentosDTO;
+            return orcamentosDTO.stream()
+                    .sorted(Comparator.comparing(ResponseOrcamentoDTO::cliente))
+                    .collect(Collectors.toList());
+
         } else {
             throw new Exception("não existe saídas registradas");
         }
