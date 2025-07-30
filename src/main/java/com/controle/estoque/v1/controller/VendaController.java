@@ -79,27 +79,26 @@ public class VendaController {
     }
 
 
-    @GetMapping("/relatorio")
-    public ResponseEntity<byte[]> gerarRelatorio() throws JRException, IOException, Exception {
+    @GetMapping("/relatorio/{id}")
+    public ResponseEntity<byte[]> gerarRelatorio(@PathVariable Long id) throws JRException, IOException, Exception {
 
-        List<Venda> dados = vendaRepository.findAll();
-
-        System.out.println("Total de vendas Encontradas" + dados.size());
+        Optional<Venda> venda = vendaRepository.findById(id);
+        Venda vendaOptinal = venda.get();//salva os dados encontratado na venda
+        List<Venda> lista = List.of(vendaOptinal);//cria uma lista com um único elemento
 
         InputStream jrxmlStream = getClass().getResourceAsStream("/relatorio.jrxml");
-        if (jrxmlStream == null) {
-            throw new FileNotFoundException("Arquivo relatorio.jrxml não encontrado no classpath!");
-        }
-
         JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlStream);
 
         Map<String, Object> params = new HashMap<>();
-        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(dados);
 
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource);
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lista);
+
+
+        JasperPrint print = JasperFillManager.fillReport(jasperReport, params,dataSource);
+
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        JasperExportManager.exportReportToPdfStream(jasperPrint, baos);
+        JasperExportManager.exportReportToPdfStream(print, baos);
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=relatorio.pdf")

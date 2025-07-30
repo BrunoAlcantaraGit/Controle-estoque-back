@@ -64,6 +64,7 @@ public class VendaService {
 
 
                 VendaResponseDTO vendaResponseDTO = new VendaResponseDTO(
+                        v.getId(),
                         v.getCliente().getNome(),
                         produtosIds,
                         orcamentoIds,

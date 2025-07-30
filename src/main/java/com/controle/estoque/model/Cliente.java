@@ -20,7 +20,7 @@ public class Cliente {
     @OneToOne(cascade = CascadeType.PERSIST)
     private Contato contato;
     @OneToOne(cascade = CascadeType.PERSIST)
-    private Endereco Endereco;
+    private Endereco endereco;
 
     public Long getId() {
         return id;
@@ -62,11 +62,19 @@ public class Cliente {
         this.contato = contato;
     }
 
+    public List<Orcamento> getOrcamentos() {
+        return orcamentos;
+    }
+
+    public void setOrcamentos(List<Orcamento> orcamentos) {
+        this.orcamentos = orcamentos;
+    }
+
     public Endereco getEndereco() {
-        return Endereco;
+        return endereco;
     }
 
     public void setEndereco(Endereco endereco) {
-        Endereco = endereco;
+        this.endereco = endereco;
     }
 }
