@@ -1,4 +1,5 @@
 package com.controle.estoque.service;
+import com.controle.estoque.configuration.DocumentFormatter;
 import com.controle.estoque.model.Contato;
 import com.controle.estoque.model.Endereco;
 import com.controle.estoque.model.Fornecedor;
@@ -34,7 +35,11 @@ public class FornecedorService {
 
     public Fornecedor salvar(Fornecedor fornecedor) throws Exception {
         Optional<Fornecedor> verificarDocumento = fornecedorRepository.findBydocumento(fornecedor.getDocumento());
+        DocumentFormatter formatter = new DocumentFormatter();
+
         if (verificarDocumento.isEmpty()) {
+            String documentoFormatado = formatter.formatarDocumento(fornecedor.getDocumento());
+            fornecedor.setDocumento(documentoFormatado);
             return fornecedorRepository.save(fornecedor);
         } else {
             throw new Exception("CNPJ já cadastrado");
@@ -46,10 +51,14 @@ public class FornecedorService {
         Optional<Fornecedor> verificarDocumento = fornecedorRepository.findById(id);
         Optional<Endereco> buscarEndereco = enderecoRepository.findById(fornecedor.getEndereco().getId());
         Optional<Contato> bucarContato = contatoRepository.findById(fornecedor.getContato().getId());
+
+        DocumentFormatter formatter = new DocumentFormatter();
+
         if (verificarDocumento.isPresent()) {
+            String documentoFormatado = formatter.formatarDocumento(fornecedor.getDocumento());
 
             Fornecedor fornecedorAtualizado = verificarDocumento.get();
-            fornecedorAtualizado.setCpf(fornecedor.getDocumento());
+            fornecedorAtualizado.setDocumento(documentoFormatado);
             fornecedorAtualizado.setNome(fornecedor.getNome());
 
             Endereco enderecoAtualizado = buscarEndereco.get();

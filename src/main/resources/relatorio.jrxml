@@ -10,6 +10,11 @@
               leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20"
               uuid="abcde123-4567-890a-bcde-1234567890ab">
 
+    <!-- Campos simples -->
+    <field name="id" class="java.lang.Long"/>
+    <field name="valorTotalDaVenda" class="java.lang.Double"/>
+    <field name="lucro" class="java.lang.Double"/>
+    <field name="orcamentoIdsFormatado" class="java.lang.String"/> <!-- Campo formatado -->
 
     <!-- Campos aninhados do Cliente -->
     <field name="cliente.nome" class="java.lang.String"/>
@@ -22,10 +27,6 @@
     <field name="cliente.endereco.cep" class="java.lang.String"/>
     <field name="cliente.endereco.estado" class="java.lang.String"/>
     <field name="cliente.endereco.complemento" class="java.lang.String"/>
-
-    <field name="id" class="java.lang.Long"/>
-    <field name="valorTotalDaVenda" class="java.lang.Double"/>
-    <field name="lucro" class="java.lang.Double"/>
 
     <!-- Título -->
     <title>
@@ -42,10 +43,10 @@
 
     <!-- Detalhes -->
     <detail>
-        <band height="180">
+        <band height="220">
 
             <textField>
-                <reportElement x="0" y="0" width="200" height="20"/>
+                <reportElement x="0" y="0" width="300" height="20"/>
                 <textFieldExpression><![CDATA["Venda ID: " + $F{id}]]></textFieldExpression>
             </textField>
 
@@ -59,28 +60,33 @@
                 <textFieldExpression><![CDATA["Lucro: R$ " + $F{lucro}]]></textFieldExpression>
             </textField>
 
+            <textField>
+                <reportElement x="0" y="60" width="500" height="20"/>
+                <textFieldExpression><![CDATA["Orçamentos: " + $F{orcamentoIdsFormatado}]]></textFieldExpression>
+            </textField>
+
             <staticText>
-                <reportElement x="0" y="70" width="300" height="20"/>
+                <reportElement x="0" y="90" width="300" height="20"/>
                 <text><![CDATA[Informações do Cliente:]]></text>
             </staticText>
 
             <textField>
-                <reportElement x="0" y="90" width="400" height="20"/>
+                <reportElement x="0" y="110" width="400" height="20"/>
                 <textFieldExpression><![CDATA["Nome: " + $F{cliente.nome}]]></textFieldExpression>
             </textField>
 
             <textField>
-                <reportElement x="0" y="110" width="400" height="20"/>
+                <reportElement x="0" y="130" width="400" height="20"/>
                 <textFieldExpression><![CDATA["Documento: " + $F{cliente.documento}]]></textFieldExpression>
             </textField>
 
             <textField>
-                <reportElement x="0" y="130" width="400" height="20"/>
+                <reportElement x="0" y="150" width="400" height="20"/>
                 <textFieldExpression><![CDATA["Telefone: " + $F{cliente.contato.telefone} + " | Email: " + $F{cliente.contato.email}]]></textFieldExpression>
             </textField>
 
             <textField>
-                <reportElement x="0" y="150" width="500" height="20"/>
+                <reportElement x="0" y="170" width="500" height="20"/>
                 <textFieldExpression><![CDATA[
                     "Endereço: " + $F{cliente.endereco.logradouro} + ", " +
                     $F{cliente.endereco.numero} + " - " + $F{cliente.endereco.bairro} +

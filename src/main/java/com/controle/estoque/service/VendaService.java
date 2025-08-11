@@ -30,12 +30,7 @@ public class VendaService {
 
     @Autowired
     private VendaRepository vendaRepository;
-    @Autowired
-    private ClienteRepository clienteRepository;
-    @Autowired
-    private OrcamentoRepository orcamentoRepository;
-    @Autowired
-    private ProdutoRepository produtoRepository;
+
 
     public Venda salvar(Venda venda) throws Exception {
 
@@ -76,7 +71,7 @@ public class VendaService {
             }
             return vendaDTOS.stream()
                     .sorted(Comparator.comparing(VendaResponseDTO::cliente))
-                    .collect(Collectors.toList());
+                    .toList();
         } else {
             throw new Exception("sale list is empty");
         }

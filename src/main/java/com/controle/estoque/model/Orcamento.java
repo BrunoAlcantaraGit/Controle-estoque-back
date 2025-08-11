@@ -1,9 +1,12 @@
 package com.controle.estoque.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
-
+@Data
 @Entity
 public class Orcamento {
     @Id
@@ -23,75 +26,5 @@ public class Orcamento {
     private Venda entityVenda;
 
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public BigDecimal getCompra() {
-        return compra;
-    }
-
-    public void setCompra(BigDecimal compra) {
-        this.compra = compra;
-    }
-
-    public BigDecimal getVenda() {
-        return venda;
-    }
-
-    public void setVenda(BigDecimal venda) {
-        this.venda = venda;
-    }
-
-    public BigDecimal getTotalDaVenda() {
-        return totalDaVenda;
-    }
-
-    public void setTotalDaVenda(BigDecimal totalDaVenda) {
-        this.totalDaVenda = totalDaVenda;
-    }
-
-    public BigDecimal getLucroTransacao() {
-        return lucroTransacao;
-    }
-
-    public void setLucroTransacao(BigDecimal lucroTransacao) {
-        this.lucroTransacao = lucroTransacao;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public Venda getEntityVenda() {
-        return entityVenda;
-    }
-
-    public void setEntityVenda(Venda entityVenda) {
-        this.entityVenda = entityVenda;
-    }
 }

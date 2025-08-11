@@ -1,5 +1,6 @@
 package com.controle.estoque.service;
 
+import com.controle.estoque.configuration.DocumentFormatter;
 import com.controle.estoque.model.Cliente;
 import com.controle.estoque.model.Contato;
 import com.controle.estoque.model.Endereco;
@@ -12,12 +13,15 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AbstractDependsOnBeanFactoryPostProcessor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -34,10 +38,17 @@ public class ClienteService {
 
     public Cliente salvar(Cliente cliente) throws Exception {
         Optional<Cliente> verificarDocumento = clienteRepository.findByDocumento(cliente.getDocumento());
-        if (verificarDocumento.isEmpty()) {
+        String validarQuantidadeDeCaractere = cliente.getDocumento();
+
+        if (verificarDocumento.isEmpty() && validarQuantidadeDeCaractere.length() <= 14) {
+            DocumentFormatter formatter = new DocumentFormatter();
+
+            String docFormatado = formatter.formatarDocumento(cliente.getDocumento());
+            cliente.setDocumento(docFormatado);
+
             return clienteRepository.save(cliente);
         } else {
-            throw new Exception("CPF/CNPJ Já está cadastrado");
+            throw new Exception("CPF/CNPJ Já está cadastrado ou dados do CPF/CNPJ inválidos");
         }
     }
 
@@ -46,6 +57,7 @@ public class ClienteService {
     @Transactional
     public void deletarPoId(Long id) throws Exception {
         Optional<Cliente> validarCliente = clienteRepository.findById(id);
+
         if (validarCliente.isPresent()) {
             clienteRepository.deleteById(id);
         } else {
@@ -60,10 +72,14 @@ public class ClienteService {
         Optional<Endereco> endereco = enderecoRepository.findById(cliente.get().getEndereco().getId());
         Optional<Contato> contato = contatoRepository.findById(cliente.get().getContato().getId());
 
+        DocumentFormatter formatter = new DocumentFormatter();
+        String docFormatado = formatter.formatarDocumento(clienteAtual.getDocumento());
+
+
         if (cliente.isPresent()) {
             Cliente clienteatualizado = cliente.get();
             clienteatualizado.setNome(clienteAtual.getNome());
-            clienteatualizado.setDocumento(clienteAtual.getDocumento());
+            clienteatualizado.setDocumento(docFormatado);
 
             Endereco enderecoAtualizado = endereco.get();
             enderecoAtualizado.setLogradouro(clienteAtual.getEndereco().getLogradouro());
@@ -105,8 +121,11 @@ public class ClienteService {
                 ClienteDTO clienteDTo = new ClienteDTO(c.getId(),c.getNome(),c.getDocumento(), c.getContato().getTelefone(),c.getContato().getEmail());
                 clientesDTO.add(clienteDTo);
             }
+            List<ClienteDTO> ordenarListByname = clientesDTO.stream()
+                    .sorted(Comparator.comparing(ClienteDTO::nome))
+                    .toList();
 
-            return clientesDTO;
+            return ordenarListByname;
         } else {
             throw new Exception("Lista não contem elementos");
         }
