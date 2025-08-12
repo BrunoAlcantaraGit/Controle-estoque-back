@@ -19,7 +19,7 @@ public class DocumentFormatter {
             if (isCpfValido(digits)) {
                 return formatCpf(digits);
             } else {
-                throw new IllegalArgumentException("CPF inválido");
+                throw new IllegalArgumentException("CPF inválido.");
             }
         } else if (digits.length() == 14) { // CNPJ
             if (isCnpjValido(digits)) {
